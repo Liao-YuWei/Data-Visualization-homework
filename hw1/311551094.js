@@ -1,18 +1,20 @@
+let data; //load csv which data type has changed to number into variable "data"
+
+
+
 d3.csv('iris.csv')
-    .then(/*loadedData => {
+    .then(loadedData => {
       data = loadedData;
       data.forEach(d => {
-        d.mpg = +d.mpg;
-        d.cylinders = +d.cylinders;
-        d.displacement = +d.displacement;
-        d.horsepower = +d.horsepower;
-        d.weight = +d.weight;
-        d.acceleration = +d.acceleration;
-        d.year = +d.year;  
+        d["sepal length"] = +d["sepal length"];
+        d["sepal width"] = +d["sepal width"];
+        d["petal length"] = +d["petal length"];
+        d["petal width"] = +d["petal width"];
       });
-      xColumn = data.columns[4];
+      console.log(data);
+      console.log(typeof(data[0]["sepal length"]));
+      console.log(typeof(data[0]["class"]));
+      /*xColumn = data.columns[4];
       yColumn = data.columns[0];
-      render();
-    }*/
-    data => {console.log(data);}
-    );
+      render();*/
+});
