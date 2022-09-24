@@ -250,6 +250,7 @@ const drawScatterPlot = (props) => {
       .attr('r', 0)
       .attr('cx', containerInnerWidth/2)
       .attr('cy', containerInnerHeight/2)
+      .attr('class', d => d.class)
     .merge(dataPoints)
     .transition().duration(2000)
       .attr('cx', d => xScale(xValue(d)))
@@ -273,7 +274,4 @@ d3.csv('http://vis.lab.djosix.com:2020/data/iris.csv')
       selectedX = options[1];
       selectedY = options[0];
       render();
-
-      /*console.log(data);
-      console.log(options);*/
 });
