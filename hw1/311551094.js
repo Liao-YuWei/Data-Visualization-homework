@@ -1,8 +1,3 @@
-/*import {
-  select,
-  csv
-} from 'd3';*/
-
 const svg = d3.select('svg');
 
 const width = parseInt(getComputedStyle(document.querySelector(':root'))
@@ -10,26 +5,12 @@ const width = parseInt(getComputedStyle(document.querySelector(':root'))
 const height = parseInt(getComputedStyle(document.querySelector(':root'))
     .getPropertyValue('--height'));
 
-let data; //load csv which data type has changed to number into variable "data"
+let data;
 let options;
 let selectedX;
 let selectedY;
 
-/*const onXClicked = column => {
-  selectedX = column;
-  render();
-};
-
-const onYClicked = column => {
-  selectedY = column;
-  render();
-};*/
-
 const dropdownMenu = (selection, selectedAxis) => {
-  /*const {
-    onOptionClicked,
-    selectedOption
-  } = props;*/
   let select = selection.selectAll('select').data([null]);
   select = select.enter().append('select')
     .merge(select)
@@ -42,7 +23,6 @@ const dropdownMenu = (selection, selectedAxis) => {
           selectedY = this.value;
           render();
         }
-        //onOptionClicked(this.value);
       })
   
   if (selectedAxis === 'x'){
@@ -64,16 +44,10 @@ const render = () => {
    * Create Drop Down Menu
   */
   d3.select('#y-menu')
-    .call(dropdownMenu, 'y'/*{
-      onOptionClicked: onYClicked,
-      selectedOption: selectedY
-    }*/);
+    .call(dropdownMenu, 'y');
 
   d3.select('#x-menu')
-    .call(dropdownMenu, 'x'/*{
-      onOptionClicked: onXClicked,
-      selectedOption: selectedX
-    }*/);
+    .call(dropdownMenu, 'x');
 
   /**
    * Draw Scatter Plot
@@ -121,57 +95,6 @@ const render = () => {
     yValue: yValue,
     radius: 10
   })
-    
-  /*const xAxis = d3.axisBottom(xScale)
-    .tickSize(-innerHeight)
-    .tickPadding(15);
-  
-  const yAxis = d3.axisLeft(yScale)
-    .tickSize(-innerWidth)
-    .tickPadding(10);
-
-  const g = svg.selectAll('.container').data([null]);
-  const gEnter = g
-    .enter().append('g')
-      .attr('class', 'container')
-      .attr('transform',`translate(${margin.left},${margin.top})`);
-  
-  const xAxisG = g.select('.xAxis');
-  const xAxisGEnter = gEnter
-    .append('g')
-      .attr('class', 'xAxis');
-  xAxisG
-    .merge(xAxisGEnter)
-      .attr('transform', `translate(0,${innerHeight})`)
-      .call(xAxis)
-      .selectAll('.domain').remove();
-  xAxisGEnter
-    .append('text')
-      .attr('class', 'axis-label')
-      .attr('y', 75)
-      .attr('fill', 'black')
-    .merge(xAxisG.select('.axis-label'))
-      .attr('x', innerWidth / 2)
-      .text(selectedX);
-
-  const yAxisG = g.select('.yAxis');
-  const yAxisGEnter = gEnter
-    .append('g')
-      .attr('class', 'yAxis');
-  yAxisG
-    .merge(yAxisGEnter)
-      .call(yAxis)
-      .selectAll('.domain').remove();
-  yAxisGEnter
-    .append('text')
-      .attr('class', 'axis-label')
-      .attr('y', -65)
-      .attr('fill', 'black')
-      .attr('transform', `rotate(-90)`)
-      .attr('text-anchor', 'middle')
-    .merge(yAxisG.select('.axis-label'))
-      .attr('x', -innerHeight / 2)
-      .text(selectedY);*/
 }
 
 const drawAxis = (props) => {
