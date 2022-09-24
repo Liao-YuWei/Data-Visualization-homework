@@ -5,8 +5,10 @@
 
 const svg = d3.select('svg');
 
-const width = +svg.attr('width');
-const height = +svg.attr('height');
+const width = parseInt(getComputedStyle(document.querySelector(':root'))
+    .getPropertyValue('--width'));
+const height = parseInt(getComputedStyle(document.querySelector(':root'))
+    .getPropertyValue('--height'));
 
 let data; //load csv which data type has changed to number into variable "data"
 let options;
