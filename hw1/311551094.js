@@ -78,7 +78,7 @@ const render = () => {
   /**
    * Draw Scatter Plot
    */
-  const margin = { top: 50, right: 60, bottom: 88, left: 110};
+  const margin = { top: 30, right: 60, bottom: 88, left: 110};
   const innerWidth = width - margin.left - margin.right;
   const innerHeight = height - margin.top - margin.bottom;
   

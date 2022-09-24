@@ -52,5 +52,35 @@ circle {
 }
 
 .Iris-virginica {
-  fill: #ADABEE;
+  fill: #CECDF7;
+}
+
+.label-specify {
+  width: var(--width);
+  margin-top: 20px;
+  text-align: center;
+}
+
+.dot {
+  height: 25px;
+  width: 25px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.dot.Iris-setosa {
+  background-color: #7153D2;
+}
+
+.dot.Iris-versicolor {
+  background-color: #2D1187;
+}
+
+.dot.Iris-virginica {
+  background-color: #CECDF7;
+}
+
+.text {
+  font-size: 1.7em;
+  font-weight: bold;
 }
