@@ -15,7 +15,6 @@ let options;
 let selectedX;
 let selectedY;
 
-
 /*const onXClicked = column => {
   selectedX = column;
   render();
@@ -95,8 +94,35 @@ const render = () => {
     .domain(d3.extent(data, yValue))
     .range([innerHeight, 0])
     .nice();
+
+  const g = svg.selectAll('.container').data([null]);
+  const gEnter = g
+    .enter().append('g')
+      .attr('class', 'container')
+      .attr('transform',`translate(${margin.left},${margin.top})`);
+
+  drawAxis({
+    g: g,
+    gEnter: gEnter,
+    containerInnerWidth: innerWidth,
+    containerInnerHeight: innerHeight,
+    xScale: xScale,
+    yScale: yScale
+  })
+
+  drawScatterPlot({
+    g: g,
+    gEnter: gEnter,
+    containerInnerWidth: innerWidth,
+    containerInnerHeight: innerHeight,
+    xScale: xScale,
+    yScale: yScale,
+    xValue: xValue,
+    yValue: yValue,
+    radius: 10
+  })
     
-  const xAxis = d3.axisBottom(xScale)
+  /*const xAxis = d3.axisBottom(xScale)
     .tickSize(-innerHeight)
     .tickPadding(15);
   
@@ -145,121 +171,91 @@ const render = () => {
       .attr('text-anchor', 'middle')
     .merge(yAxisG.select('.axis-label'))
       .attr('x', -innerHeight / 2)
-      .text(selectedY);
+      .text(selectedY);*/
 }
 
-/*svg.call(scatterPlot, {
-  xValue: d => d[xColumn],
-  xAxisLabel: xColumn,
-  yValue: d => d[yColumn],
-  circleRadius: 10,
-  yAxisLabel: yColumn,
-  margin: { top: 10, right: 40, bottom: 88, left: 150 },
-  width,
-  height,
-  data
-});*/
-
-/*const scatterPlot = (selection, props) => {
+const drawAxis = (props) => {
   const {
-    xValue,
-    xAxisLabel,
-    yValue,
-    circleRadius,
-    yAxisLabel,
-    margin,
-    width,
-    height,
-    data
+    g,
+    gEnter,
+    containerInnerWidth,
+    containerInnerHeight,
+    xScale,
+    yScale
   } = props;
-  
-  const innerWidth = width - margin.left - margin.right;
-  const innerHeight = height - margin.top - margin.bottom;
-  
-  const xScale = scaleLinear()
-    .domain(extent(data, xValue))
-    .range([0, innerWidth])
-    .nice();
-  
-  const yScale = scaleLinear();
-  yScale.domain(extent(data, yValue));
-  yScale.range([innerHeight, 0]);
-  yScale.nice();
-  
-  const g = selection.selectAll('.container').data([null]);
-  const gEnter = g
-    .enter().append('g')
-      .attr('class', 'container');
-  gEnter
-    .merge(g)
-      .attr('transform',
-        `translate(${margin.left},${margin.top})`
-      );
-  
-  const xAxis = axisBottom(xScale)
-    .tickSize(-innerHeight)
+
+  const xAxis = d3.axisBottom(xScale)
+    .tickSize(-containerInnerHeight)
     .tickPadding(15);
   
-  const yAxis = axisLeft(yScale)
-    .tickSize(-innerWidth)
+  const yAxis = d3.axisLeft(yScale)
+    .tickSize(-containerInnerWidth)
     .tickPadding(10);
   
-  const yAxisG = g.select('.y-axis');
-  const yAxisGEnter = gEnter
-    .append('g')
-      .attr('class', 'y-axis');
-  yAxisG
-    .merge(yAxisGEnter)
-      .call(yAxis)
-      .selectAll('.domain').remove();
-  
-  const yAxisLabelText = yAxisGEnter
-    .append('text')
-      .attr('class', 'axis-label')
-      .attr('y', -93)
-      .attr('fill', 'black')
-      .attr('transform', `rotate(-90)`)
-      .attr('text-anchor', 'middle')
-    .merge(yAxisG.select('.axis-label'))
-      .attr('x', -innerHeight / 2)
-      .text(yAxisLabel);
-  
-  
-  const xAxisG = g.select('.x-axis');
+  const xAxisG = g.select('.xAxis');
   const xAxisGEnter = gEnter
     .append('g')
-      .attr('class', 'x-axis');
+      .attr('class', 'xAxis');
   xAxisG
     .merge(xAxisGEnter)
-      .attr('transform', `translate(0,${innerHeight})`)
+      .attr('transform', `translate(0,${containerInnerHeight})`)
       .call(xAxis)
       .selectAll('.domain').remove();
-  
-  const xAxisLabelText = xAxisGEnter
+  xAxisGEnter
     .append('text')
       .attr('class', 'axis-label')
       .attr('y', 75)
       .attr('fill', 'black')
     .merge(xAxisG.select('.axis-label'))
-      .attr('x', innerWidth / 2)
-      .text(xAxisLabel);
+      .attr('x', containerInnerWidth / 2)
+      .text(selectedX);
 
-  
-  const circles = g.merge(gEnter)
+  const yAxisG = g.select('.yAxis');
+  const yAxisGEnter = gEnter
+    .append('g')
+      .attr('class', 'yAxis');
+  yAxisG
+    .merge(yAxisGEnter)
+      .call(yAxis)
+      .selectAll('.domain').remove();
+  yAxisGEnter
+    .append('text')
+      .attr('class', 'axis-label')
+      .attr('y', -65)
+      .attr('fill', 'black')
+      .attr('transform', `rotate(-90)`)
+      .attr('text-anchor', 'middle')
+    .merge(yAxisG.select('.axis-label'))
+      .attr('x', -containerInnerHeight / 2)
+      .text(selectedY);
+}
+
+const drawScatterPlot = (props) => {
+  const {
+    g,
+    gEnter,
+    containerInnerWidth,
+    containerInnerHeight,
+    xScale,
+    yScale,
+    xValue,
+    yValue,
+    radius
+  } = props;
+
+  const dataPoints = g.merge(gEnter)
     .selectAll('circle').data(data);
-  circles
+  dataPoints
     .enter().append('circle')
-      .attr('cx', innerWidth / 2)
-      .attr('cy', innerHeight / 2)
       .attr('r', 0)
-    .merge(circles)
+      .attr('cx', containerInnerWidth/2)
+      .attr('cy', containerInnerHeight/2)
+    .merge(dataPoints)
     .transition().duration(2000)
-    .delay((d, i) => i * 10)
-      .attr('cy', d => yScale(yValue(d)))
       .attr('cx', d => xScale(xValue(d)))
-      .attr('r', circleRadius);
-};*/
-
+      .attr('cy', d => yScale(yValue(d)))
+      .attr('r', radius);
+}
 
 d3.csv('http://vis.lab.djosix.com:2020/data/iris.csv')
     .then(loadedData => {
@@ -270,6 +266,7 @@ d3.csv('http://vis.lab.djosix.com:2020/data/iris.csv')
         d["petal length"] = +d["petal length"];
         d["petal width"] = +d["petal width"];
       });
+      data.pop();
       options = Object.values(data.columns);
       options = options.slice(0,4);
 
