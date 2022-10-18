@@ -12,15 +12,9 @@ const drawAxis = (props) => {
   const {
     g,
     gEnter,
-    containerInnerWidth,
-    containerInnerHeight,
     xScale,
     yScale
   } = props;
-  
-  /*const yAxis = d3.axisLeft(yScale)
-    .tickSize(-containerInnerWidth)
-    .tickPadding(10);*/
 
   const yAxisG = g.merge(gEnter)
     .selectAll('.yAxis').data(columns);
@@ -37,55 +31,30 @@ const drawAxis = (props) => {
         .attr('y', -13)
         .attr('fill', 'black')
         .attr('text-anchor', 'middle');
-
-  /*const yAxisGEnter = gEnter
-    .append('g')
-      .attr('class', 'yAxis');
-  yAxisG
-    .merge(yAxisGEnter)
-      .attr("transform", function(d) {return "translate(" + xScale(d) + ")";})
-      .each(function(d) { 
-            d3.select(this)
-              .call(d3.axisLeft(yScale[d])
-                .tickSize(-containerInnerWidth)
-                .tickPadding(10));})
-      .selectAll('.domain').remove();*/
-  /*yAxisGEnter
-    .append('text')
-      .attr('class', 'axis-label')
-      .attr('y', -65)
-      .attr('fill', 'black')
-      .attr('text-anchor', 'middle')
-    .merge(yAxisG.select('.axis-label'))
-      .attr('x', -containerInnerHeight / 2)
-      .text(columns);*/
 }
 
-const drawScatterPlot = (props) => {
+const drawPath = (props) => {
   const {
     g,
     gEnter,
-    containerInnerWidth,
-    containerInnerHeight,
     xScale,
-    yScale,
-    xValue,
-    yValue,
+    yScale
   } = props;
 
-  /*const dataPoints = g.merge(gEnter)
-    .selectAll('circle').data(data);
-  dataPoints
-    .enter().append('circle')
-      .attr('r', 0)
-      .attr('cx', containerInnerWidth/2)
-      .attr('cy', containerInnerHeight/2)
+  function path(d) {
+    return d3.line()(columns.map(function(p) { return [xScale(p), yScale[p](d[p])]; }));
+  }
+
+  const paths = g.merge(gEnter)
+    .selectAll('.line-path').data(data);
+  
+  paths
+    .enter().append('path')
       .attr('class', d => d.class)
-    .merge(dataPoints)
-    .transition().duration(2000)
-      .attr('cx', d => xScale(xValue(d)))
-      .attr('cy', d => yScale(yValue(d)))
-      .attr('r', radius);*/
+      .attr('d', path)
+      .style('fill', 'none')
+      .style('stroke-width', 2)
+      .style('opacity', 0.7);
 }
 
 const render = () => {
@@ -116,24 +85,18 @@ const render = () => {
       .attr('class', 'container')
       .attr('transform',`translate(${margin.left},${margin.top})`);
 
-  drawAxis({
+  drawPath({
     g: g,
     gEnter: gEnter,
-    containerInnerWidth: innerWidth,
-    containerInnerHeight: innerHeight,
     xScale: xScale,
     yScale: yScale
   })
 
-  drawPath({
+  drawAxis({
     g: g,
     gEnter: gEnter,
-    containerInnerWidth: innerWidth,
-    containerInnerHeight: innerHeight,
     xScale: xScale,
-    yScale: yScale,
-    xValue: xValue,
-    yValue: yValue,
+    yScale: yScale
   })
 
 }
