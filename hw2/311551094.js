@@ -65,7 +65,7 @@ const render = () => {
     })
     .on('drag', function(d) { 
       paths.attr('d', path)
-      dragging[d] = Math.min(innerWidth + 1, Math.max(-1, d3.event.x));
+      dragging[d] = Math.min(innerWidth + 50, Math.max(-50, d3.event.x));
       columns.sort( (a, b) => position(a) - position(b));
       xScale.domain(columns);
       yAxisG
@@ -73,7 +73,9 @@ const render = () => {
     })
     .on('end', function(d) { 
       delete dragging[d];
-      paths.attr('d', path)
+      paths
+        .transition().duration(500)
+        .attr('d', path)
       d3.select(this)
         .transition().duration(500)
         .attr("transform", d => "translate(" + position(d) + ")");
