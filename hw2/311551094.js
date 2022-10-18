@@ -8,66 +8,13 @@ const height = parseInt(getComputedStyle(document.querySelector(':root'))
 let data;
 let columns;
 
-const drawAxis = (props) => {
-  const {
-    g,
-    gEnter,
-    xScale,
-    yScale
-  } = props;
-
-  const yAxisG = g.merge(gEnter)
-    .selectAll('.yAxis').data(columns);
-  yAxisG
-    .enter().append('g')
-      .attr("transform", function(d) {return "translate(" + xScale(d) + ")";})
-      .each(function(d) { 
-            d3.select(this)
-              .call(d3.axisLeft(yScale[d])
-                .tickPadding(10));})
-      .append('text')
-        .attr('class', 'axis-label')
-        .text(function(d) { return d; })
-        .attr('y', -13)
-        .attr('fill', 'black')
-        .attr('text-anchor', 'middle');
-}
-
-const drawPath = (props) => {
-  const {
-    g,
-    gEnter,
-    xScale,
-    yScale
-  } = props;
-
-  function path(d) {
-    return d3.line()(columns.map(function(p) { return [xScale(p), yScale[p](d[p])]; }));
-  }
-
-  const paths = g.merge(gEnter)
-    .selectAll('.line-path').data(data);
-  
-  paths
-    .enter().append('path')
-      .attr('class', d => d.class)
-      .attr('d', path)
-      .style('fill', 'none')
-      .style('stroke-width', 1.5)
-      .style('opacity', 0.7);
-}
-
 const render = () => {
-  /**
-   * Draw Scatter Plot
-   */
-  const margin = { top: 30, right: 60, bottom: 88, left: 30};
+  const margin = { top: 30, right: 80, bottom: 88, left: 80};
   const innerWidth = width - margin.left - margin.right;
   const innerHeight = height - margin.top - margin.bottom;
 
   const xScale = d3.scalePoint()
     .range([0, innerWidth])
-    .padding(1)
     .domain(columns);
 
   var yScale = {}
@@ -85,20 +32,72 @@ const render = () => {
       .attr('class', 'container')
       .attr('transform',`translate(${margin.left},${margin.top})`);
 
-  drawPath({
-    g: g,
-    gEnter: gEnter,
-    xScale: xScale,
-    yScale: yScale
-  })
+  var dragging = {};
 
-  drawAxis({
-    g: g,
-    gEnter: gEnter,
-    xScale: xScale,
-    yScale: yScale
-  })
+  /**
+   * Draw path
+   */
+  function position(d) {
+    return dragging[d] == null ? xScale(d) : dragging[d];
+  } 
 
+  function path(d) {
+    return d3.line()(columns.map(p => [position(p), yScale[p](d[p])] ));
+  }
+
+  var paths = g.merge(gEnter)
+    .selectAll('.line-path').data(data);
+  
+  paths = paths
+    .enter().append('path')
+      .attr('class', d => d.class)
+      .attr('d', path)
+      .style('fill', 'none')
+      .style('stroke-width', 1.5)
+      .style('opacity', 0.7);
+  
+  /**
+   * Draw Axes
+   */
+  const drag = d3.drag()  
+    .on('start', function(d) { 
+      dragging[d] = xScale(d);
+    })
+    .on('drag', function(d) { 
+      paths.attr('d', path)
+      dragging[d] = Math.min(innerWidth + 1, Math.max(-1, d3.event.x));
+      columns.sort( (a, b) => position(a) - position(b));
+      xScale.domain(columns);
+      yAxisG
+        .attr("transform", d => "translate(" + position(d) + ")");
+    })
+    .on('end', function(d) { 
+      delete dragging[d];
+      paths.attr('d', path)
+      d3.select(this)
+        .transition().duration(500)
+        .attr("transform", d => "translate(" + position(d) + ")");
+    });
+
+  const dragAxisG = g.merge(gEnter)
+    .selectAll('.yAxis').data(columns);
+
+  const yAxisG = dragAxisG
+    .enter().append('g')
+      .call(drag)
+      .attr("transform",d => "translate(" + position(d) + ")");
+  
+  yAxisG
+    .each(function(d) { 
+          d3.select(this)
+            .call(d3.axisLeft(yScale[d])
+              .tickPadding(10));})
+    .append('text')
+      .attr('class', 'axis-label')
+      .text(function(d) { return d; })
+      .attr('y', -13)
+      .attr('fill', 'black')
+      .attr('text-anchor', 'middle');
 }
 
 d3.csv('http://vis.lab.djosix.com:2020/data/iris.csv')
