@@ -53,7 +53,7 @@ const drawPath = (props) => {
       .attr('class', d => d.class)
       .attr('d', path)
       .style('fill', 'none')
-      .style('stroke-width', 2)
+      .style('stroke-width', 1.5)
       .style('opacity', 0.7);
 }
 
