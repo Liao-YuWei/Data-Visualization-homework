@@ -92,12 +92,17 @@ const render = () => {
           d3.select(this)
             .call(d3.axisLeft(yScale[d])
               .tickPadding(10));})
+      .style('font-size', '1em')
+      .style('stroke-width', '1.5px')
+      .style("cursor", "pointer")
     .append('text')
       .attr('class', 'axis-label')
       .text(function(d) { return d; })
       .attr('y', -13)
       .attr('fill', 'black')
-      .attr('text-anchor', 'middle');
+      .attr('text-anchor', 'middle')
+      .style('font-size', '1.4em')
+      .style('font-weight', 750);
 }
 
 d3.csv('http://vis.lab.djosix.com:2020/data/iris.csv')

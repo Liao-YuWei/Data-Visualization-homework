@@ -14,15 +14,19 @@ svg {
 }
 
 .Iris-setosa {
-  stroke: #09db48;
+  stroke: #099122;
 }
 
 .Iris-versicolor {
-  stroke: #2D1187;
+  stroke: #078cf2;
 }
 
 .Iris-virginica {
   stroke: #fa7305;
+}
+
+.text {
+  font-size: 1.7em;
 }
 
 .legend {
@@ -40,11 +44,11 @@ svg {
 }
 
 .dot.Iris-setosa {
-  background-color: #09db48;
+  background-color: #099122;
 }
 
 .dot.Iris-versicolor {
-  background-color: #2D1187;
+  background-color: #078cf2;
 }
 
 .dot.Iris-virginica {
