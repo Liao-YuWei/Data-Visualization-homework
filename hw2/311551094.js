@@ -103,7 +103,7 @@ const render = () => {
       .attr('y', -13)
       .attr('fill', 'black')
       .attr('text-anchor', 'middle')
-      .style('font-size', '1.4em')
+      .style('font-size', '1.15em')
       .style('font-weight', 750);
 }
 
