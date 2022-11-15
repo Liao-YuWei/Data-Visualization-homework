@@ -8,9 +8,9 @@ const height = parseInt(getComputedStyle(document.querySelector(':root'))
 let data;
 let columns;
 
-let options = ['popularity', 'duration_s', 'danceability', 'energy', 'key',
-              'loudness', 'mode','speechiness', 'acousticness', 'instrumentalness', 
-              'liveness', 'valence', 'tempo', 'time_signature']
+let options = ['duration_s', 'danceability', 'energy', 'key',
+              'loudness', 'mode','speechiness', 'acousticness',
+              'instrumentalness', 'liveness', 'valence', 'tempo', 'time_signature']
 let selectedX;
 let selectedY;
 
@@ -47,11 +47,12 @@ const render = () => {
   /** 
    * Create Drop Down Menu
   */
-   d3.select('#y-menu')
+  d3.select('#y-menu')
    .call(dropdownMenu, 'y');
 
   d3.select('#x-menu')
    .call(dropdownMenu, 'x');
+  
 
   /**
    * Draw Scatter Plot
@@ -78,6 +79,9 @@ const render = () => {
     .domain(d3.extent(data, yValue))
     .range([innerHeight, 0])
     .nice();
+  
+  var colorScale = d3.scaleSequential(d3.interpolateRgb("white", "red"))
+   .domain([0, 100]);
 
   drawAxis({
     g: g,
@@ -97,9 +101,84 @@ const render = () => {
     yScale: yScale,
     xValue: xValue,
     yValue: yValue,
-    radius: 3
+    radius: 3,
+    colorScale: colorScale
+  })
+
+  continuousLegend({
+    g: g,
+    gEnter: gEnter,
+    colorScale: colorScale
   })
 }
+
+// create continuous color legend
+const continuousLegend = (props) => {
+  const {
+    g,
+    gEnter,
+    colorScale
+  } = props;
+
+  var legendheight = 40,
+      legendwidth = 700,
+      margin = {top: 10, right: 60, bottom: 10, left: 270};
+
+  var canvas = d3.select("#legend")
+    .style("height", legendheight + "px")
+    .style("width", legendwidth + "px")
+    .style("position", "relative")
+    .append("canvas")
+    .attr("height", 1)
+    .attr("width", legendwidth - margin.left - margin.right)
+    .style("height", (legendheight - margin.top - margin.bottom) + "px")
+    .style("width", (legendwidth - margin.left - margin.right) + "px")
+    .style("border", "1px solid #000")
+    .style("position", "absolute")
+    .style("top", (margin.top) + "px")
+    .style("left", (margin.left) + "px")
+    .node();
+
+  var ctx = canvas.getContext("2d");
+
+  var legendscale = d3.scaleLinear()
+    .range([1, legendwidth - margin.left - margin.right])
+    .domain(colorScale.domain());
+
+  var image = ctx.createImageData(legendwidth, 1);
+  d3.range(legendwidth).forEach(function(i) {
+    var c = d3.rgb(colorScale(legendscale.invert(i)));
+    image.data[4*i] = c.r;
+    image.data[4*i + 1] = c.g;
+    image.data[4*i + 2] = c.b;
+    image.data[4*i + 3] = 255;
+  });
+  ctx.putImageData(image, 0, 0);
+
+  var legendaxis = d3.axisBottom()
+    .scale(legendscale)
+    .tickSize(6)
+    .ticks(8);
+
+  var svg = d3.select("#legend")
+    .append("svg")
+    .attr("height", (legendheight) + "px")
+    .attr("width", (legendwidth) + "px")
+    .style("position", "absolute")
+    .style("left", "0px")
+    .style("top", "0px")
+
+  svg
+    .append("g")
+      .attr("class", "axis")
+      .attr("transform", "translate(" + (margin.left) + "," + (legendheight - margin.top) + ")")
+    .call(legendaxis)
+    .append('text')
+      .attr('class', 'legend-label')
+      .text("popularity")
+      .attr('x', (legendwidth - margin.left - margin.right) / 2)
+      .attr('y', 50);
+};
 
 const drawAxis = (props) => {
   const {
@@ -167,7 +246,8 @@ const drawScatterPlot = (props) => {
     yScale,
     xValue,
     yValue,
-    radius
+    radius,
+    colorScale
   } = props;
 
   const dataPoints = g.merge(gEnter)
@@ -177,7 +257,7 @@ const drawScatterPlot = (props) => {
       .attr('r', 0)
       .attr('cx', containerInnerWidth/2)
       .attr('cy', containerInnerHeight/2)
-      .attr('class', d => d.class)
+      .attr('fill', d => colorScale(d.popularity))
     .merge(dataPoints)
     //.transition().duration(2000)
       .attr('cx', d => xScale(xValue(d)))
@@ -208,11 +288,8 @@ d3.csv('http://vis.lab.djosix.com:2020/data/spotify_tracks.csv')
       d["tempo"] = +d["tempo"];
       d["time_signature"] = +d["time_signature"];
     });
-    //console.log(data[112678]);
     columns = Object.values(data.columns);
     columns[0] = 'number';
-    //console.log(columns)
-    console.log(options)
     selectedX = options[1];
     selectedY = options[0];
 
