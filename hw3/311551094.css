@@ -54,3 +54,7 @@ circle {
 #slider {
   --height: 100px;
 }
+
+#number-data {
+  text-align: center;
+}

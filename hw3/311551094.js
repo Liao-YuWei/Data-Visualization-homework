@@ -14,6 +14,11 @@ let options = ['duration_s', 'danceability', 'energy', 'key',
 let selectedX;
 let selectedY;
 
+let filter_down = 0;
+let filter_up = 100;
+
+let filter_data;
+
 const dropdownMenu = (selection, selectedAxis) => {
   let select = selection.selectAll('select').data([null]);
   select = select.enter().append('select')
@@ -52,7 +57,6 @@ const render = () => {
 
   d3.select('#x-menu')
    .call(dropdownMenu, 'x');
-  
 
   /**
    * Draw Scatter Plot
@@ -95,8 +99,6 @@ const render = () => {
   drawScatterPlot({
     g: g,
     gEnter: gEnter,
-    containerInnerWidth: innerWidth,
-    containerInnerHeight: innerHeight,
     xScale: xScale,
     yScale: yScale,
     xValue: xValue,
@@ -120,7 +122,7 @@ const continuousLegend = (props) => {
 
   var legendheight = 40,
       legendwidth = 700,
-      margin = {top: 10, right: 60, bottom: 10, left: 270};
+      margin = {top: 10, right: 60, bottom: 10, left: 240};
 
   var canvas = d3.select("#legend")
     .style("height", legendheight + "px")
@@ -173,8 +175,8 @@ const continuousLegend = (props) => {
     .call(legendaxis);
 };
 
-function draggableSlider(){
-  const margin = {top: 0, right: 60, bottom: 0, left: 245}
+function draggableSlider() {
+  const margin = {top: 0, right: 60, bottom: 0, left: 225}
 
   const slider_svg = d3.select('svg#slider-range');
   const g = slider_svg.selectAll('.container').data([null]);
@@ -195,6 +197,10 @@ function draggableSlider(){
     .fill('#2196f3')
     .on('onchange', val => {
       d3.select('p#value-range').text(val.map(d3.format('d')).join(' - '));
+      filter_down = Math.floor(val[0]);
+      filter_up = Math.floor(val[1]);
+      filter_data = data.filter(d => d.popularity >= filter_down && d.popularity <= filter_up)
+      render();
     });
 
   /*d3.select('svg#slider-range')
@@ -208,10 +214,12 @@ function draggableSlider(){
     .append('text')
       .attr('class', 'legend-label')
       .text("popularity")
-      .attr('x', 145)
+      .attr('x', 125)
       .attr('y', 60)
       .style("font-size", "26px")
       .attr("font-weight", 1000);
+
+  d3.select('nobr#number-data').text(filter_data.length)
 }
 
 const drawAxis = (props) => {
@@ -274,8 +282,6 @@ const drawScatterPlot = (props) => {
   const {
     g,
     gEnter,
-    containerInnerWidth,
-    containerInnerHeight,
     xScale,
     yScale,
     xValue,
@@ -285,18 +291,17 @@ const drawScatterPlot = (props) => {
   } = props;
 
   const dataPoints = g.merge(gEnter)
-    .selectAll('circle').data(data);
+    .selectAll('circle').data(filter_data);
   dataPoints
     .enter().append('circle')
-      .attr('r', 0)
-      .attr('cx', containerInnerWidth/2)
-      .attr('cy', containerInnerHeight/2)
-      .attr('fill', d => colorScale(d.popularity))
     .merge(dataPoints)
-    //.transition().duration(2000)
+      .attr('fill', d => colorScale(d.popularity))
       .attr('cx', d => xScale(xValue(d)))
       .attr('cy', d => yScale(yValue(d)))
       .attr('r', radius);
+    
+  dataPoints.exit()
+    .remove();
 }
 
 d3.csv('http://vis.lab.djosix.com:2020/data/spotify_tracks.csv')
@@ -326,6 +331,7 @@ d3.csv('http://vis.lab.djosix.com:2020/data/spotify_tracks.csv')
     columns[0] = 'number';
     selectedX = options[1];
     selectedY = options[0];
+    filter_data = data;
 
     render();
 });
