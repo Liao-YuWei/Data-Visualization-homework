@@ -14,13 +14,13 @@ svg {
 }
 
 #menus {
-  font-size: 3em;
+  font-size: 2em;
   width: var(--width);
   text-align: center;
 }
 
 #menus select {
-  font-size: 2rem;
+  font-size: 1.3rem;
   margin-right: 20px;
   margin-left: 20px;
 }
@@ -43,7 +43,14 @@ circle {
   opacity: 0.8;
 }
 
+#legend{
+  --height: 52px
+}
+
 .legend-label {
-  font-size: 2.3em;
   fill: black;
+}
+
+#slider {
+  --height: 100px;
 }

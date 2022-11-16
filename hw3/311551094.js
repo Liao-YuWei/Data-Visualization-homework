@@ -1,4 +1,4 @@
-const svg = d3.select('svg');
+const svg = d3.select('svg#scatter-plot');
 
 const width = parseInt(getComputedStyle(document.querySelector(':root'))
     .getPropertyValue('--width'));
@@ -158,32 +158,38 @@ const continuousLegend = (props) => {
     .tickSize(6)
     .ticks(8);
 
-  var svg = d3.select("#legend")
+  var legend_svg = d3.select("#legend")
     .append("svg")
-    .attr("height", (legendheight) + "px")
-    .attr("width", (legendwidth) + "px")
-    .style("position", "absolute")
-    .style("left", "0px")
-    .style("top", "0px")
+      .attr("height", (legendheight) + "px")
+      .attr("width", (legendwidth) + "px")
+      .style("position", "absolute")
+      .style("left", "0px")
+      .style("top", "0px");
 
-  svg
+  legend_svg
     .append("g")
       .attr("class", "axis")
       .attr("transform", "translate(" + (margin.left) + "," + (legendheight - margin.top) + ")")
-    .call(legendaxis)
-    .append('text')
-      .attr('class', 'legend-label')
-      .text("popularity")
-      .attr('x', (legendwidth - margin.left - margin.right) / 2)
-      .attr('y', 50);
+    .call(legendaxis);
 };
 
 function draggableSlider(){
+  const margin = {top: 0, right: 60, bottom: 0, left: 245}
+
+  const slider_svg = d3.select('svg#slider-range');
+  const g = slider_svg.selectAll('.container').data([null]);
+  const gEnter = g
+    .enter().append('g')
+      .attr('class', 'container')
+      .attr('transform',`translate(${margin.left},${margin.top})`)
+      .attr('width', 500)
+      .attr('height', 100);
+
   var sliderRange = d3
     .sliderBottom()
     .min(d3.min(data, function(d) {return d["popularity"];}))
     .max(d3.max(data, function(d) {return d["popularity"];}))
-    .width(300)
+    .width(360)
     .ticks(10)
     .default([0, 100])
     .fill('#2196f3')
@@ -191,23 +197,22 @@ function draggableSlider(){
       d3.select('p#value-range').text(val.map(d3.format('d')).join(' - '));
     });
 
-  d3.select('div#slider-range')
+  /*d3.select('svg#slider-range')
     .append('svg')
-    .attr('width', 500)
-    .attr('height', 100)
+      .attr('width', 500)
+      .attr('height', 100)*/
+  gEnter
     .append('g')
-    .attr('transform', 'translate(30,30)')
-    .call(sliderRange);
-
-  d3.select('p#value-range').text(
-    sliderRange
-      .value()
-      .map(d3.format('d'))
-      .join(' - ')
-  );
+      .attr('transform', 'translate(30,30)')
+      .call(sliderRange)
+    .append('text')
+      .attr('class', 'legend-label')
+      .text("popularity")
+      .attr('x', 145)
+      .attr('y', 60)
+      .style("font-size", "26px")
+      .attr("font-weight", 1000);
 }
-
-
 
 const drawAxis = (props) => {
   const {
