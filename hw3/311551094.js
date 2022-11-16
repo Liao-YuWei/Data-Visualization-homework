@@ -106,17 +106,15 @@ const render = () => {
   })
 
   continuousLegend({
-    g: g,
-    gEnter: gEnter,
     colorScale: colorScale
   })
+  
+  draggableSlider()
 }
 
 // create continuous color legend
 const continuousLegend = (props) => {
   const {
-    g,
-    gEnter,
     colorScale
   } = props;
 
@@ -179,6 +177,37 @@ const continuousLegend = (props) => {
       .attr('x', (legendwidth - margin.left - margin.right) / 2)
       .attr('y', 50);
 };
+
+function draggableSlider(){
+  var sliderRange = d3
+    .sliderBottom()
+    .min(d3.min(data, function(d) {return d["popularity"];}))
+    .max(d3.max(data, function(d) {return d["popularity"];}))
+    .width(300)
+    .ticks(10)
+    .default([0, 100])
+    .fill('#2196f3')
+    .on('onchange', val => {
+      d3.select('p#value-range').text(val.map(d3.format('d')).join(' - '));
+    });
+
+  d3.select('div#slider-range')
+    .append('svg')
+    .attr('width', 500)
+    .attr('height', 100)
+    .append('g')
+    .attr('transform', 'translate(30,30)')
+    .call(sliderRange);
+
+  d3.select('p#value-range').text(
+    sliderRange
+      .value()
+      .map(d3.format('d'))
+      .join(' - ')
+  );
+}
+
+
 
 const drawAxis = (props) => {
   const {
