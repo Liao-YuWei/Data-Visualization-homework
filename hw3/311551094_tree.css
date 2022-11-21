@@ -1,4 +1,4 @@
-:root {
+/* :root {
   --width: 940px;
   --height: 450px;
 }
@@ -11,4 +11,21 @@ body {
 svg {
   width: var(--width);
   height: var(--height);
+} */
+
+.node circle {
+  fill: #fff;
+  stroke: steelblue;
+  stroke-width: 3px;
+}
+
+.node text {
+  font: 9px sans-serif;
+  font-weight: bold;
+}
+
+.link {
+  fill: none;
+  stroke: #ccc;
+  stroke-width: 2px;
 }
