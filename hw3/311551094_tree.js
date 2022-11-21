@@ -151,54 +151,56 @@ function create_tree_json(artists_popularity, data) {
       if(album_list.some(e => e['name'] === d['album_name'])){
         album_list.forEach(a => {
           if(a['name'] === d['album_name']){
-            a['children'].push({'number': d['number'],
-                                'track_id': d['track_id'], 
-                                'artists': current_artist,
-                                'album_name': d['album_name'],
-                                'name': d['track_name'],
-                                'popularity': d['popularity'],
-                                'duration_s': d['duration_s'],
-                                'explicit': d['explicit'],
-                                'danceability': d['danceability'],
-                                'energy': d['energy'],
-                                'key': d['key'],
-                                'loudness': d['loudness'],
-                                'mode': d['mode'],
-                                'speechiness': d['speechiness'],
-                                'acousticness': d['acousticness'],
-                                'instrumentalness': d['instrumentalness'],
-                                'liveness': d['liveness'],
-                                'valence': d['valence'],
-                                'tempo': d['tempo'],
-                                'time_signature': d['time_signature'],
-                                'track_genre': d['track_genre']})
+            a['children'].push({'name': d['track_name'],
+                                'toolTipData': {
+                                  'number': d['number'],
+                                  'track_id': d['track_id'], 
+                                  'artists': current_artist,
+                                  'album_name': d['album_name'],
+                                  'popularity': d['popularity'],
+                                  'duration_s': d['duration_s'],
+                                  'explicit': d['explicit'],
+                                  'danceability': d['danceability'],
+                                  'energy': d['energy'],
+                                  'key': d['key'],
+                                  'loudness': d['loudness'],
+                                  'mode': d['mode'],
+                                  'speechiness': d['speechiness'],
+                                  'acousticness': d['acousticness'],
+                                  'instrumentalness': d['instrumentalness'],
+                                  'liveness': d['liveness'],
+                                  'valence': d['valence'],
+                                  'tempo': d['tempo'],
+                                  'time_signature': d['time_signature'],
+                                  'track_genre': d['track_genre']}})
           }
         })
       }
       else{
         album_list.push({
           "name": d['album_name'],
-          "children": [{'number': d['number'],
-                        'track_id': d['track_id'], 
-                        'artists': current_artist,
-                        'album_name': d['album_name'],
-                        'name': d['track_name'],
-                        'popularity': d['popularity'],
-                        'duration_s': d['duration_s'],
-                        'explicit': d['explicit'],
-                        'danceability': d['danceability'],
-                        'energy': d['energy'],
-                        'key': d['key'],
-                        'loudness': d['loudness'],
-                        'mode': d['mode'],
-                        'speechiness': d['speechiness'],
-                        'acousticness': d['acousticness'],
-                        'instrumentalness': d['instrumentalness'],
-                        'liveness': d['liveness'],
-                        'valence': d['valence'],
-                        'tempo': d['tempo'],
-                        'time_signature': d['time_signature'],
-                        'track_genre': d['track_genre']
+          "children": [{'name': d['track_name'],
+                        'toolTipData': {
+                          'number': d['number'],
+                          'track_id': d['track_id'], 
+                          'artists': current_artist,
+                          'album_name': d['album_name'],
+                          'popularity': d['popularity'],
+                          'duration_s': d['duration_s'],
+                          'explicit': d['explicit'],
+                          'danceability': d['danceability'],
+                          'energy': d['energy'],
+                          'key': d['key'],
+                          'loudness': d['loudness'],
+                          'mode': d['mode'],
+                          'speechiness': d['speechiness'],
+                          'acousticness': d['acousticness'],
+                          'instrumentalness': d['instrumentalness'],
+                          'liveness': d['liveness'],
+                          'valence': d['valence'],
+                          'tempo': d['tempo'],
+                          'time_signature': d['time_signature'],
+                          'track_genre': d['track_genre']}
           }]
         });
       }
@@ -210,7 +212,7 @@ function create_tree_json(artists_popularity, data) {
       "children": album_list
     });
   };
-  //console.log(tree_json)
+  console.log(tree_json)
 
   return tree_json;
 }
@@ -256,7 +258,9 @@ function update(source) {
       .attr("transform", function(d) {
         return "translate(" + source.y0 + "," + source.x0 + ")";
     })
-    .on('click', click);
+    .on('click', click)
+    .on("mouseover", mouseover)
+    .on("mouseout", mouseout);;
 
   // Add Circle for the nodes
   nodeEnter.append('circle')
@@ -370,6 +374,93 @@ function update(source) {
         d._children = null;
       }
     update(d);
+  }
+
+  //show information when mouse hover on node
+  const toolTipG = svg.append("g");
+  const toolTipRect = toolTipG
+    .append("rect")
+    .attr("id", "rectTooltip")
+    .attr("rx", 5)
+    .style("visibility", "hidden");
+  const toolTipText = toolTipG
+    .append("text")
+    .attr("id", "textTooltip")
+    .style("visibility", "hidden");
+  const popText = toolTipText.append("tspan");
+  const genreText = toolTipText.append("tspan");
+  const bpmText = toolTipText.append("tspan");
+  const valenceText = toolTipText.append("tspan");
+
+  function mouseover(d) {
+    if (d.data.toolTipData) {
+      const el = d3.select(this).select(".node");
+      el.style("r", 13).style("fill", "#ff8f34");
+
+      toolTipText.style("visibility", "visible");
+
+      const data = d.data.toolTipData;
+
+      popText
+        .attr("x", d.y + 35)
+        .attr("y", d.x - 10)
+        .text(() => {
+          return `Popularity: ${data.popularity}`;
+        });
+
+      let maxTextWidth = popText.node().getBBox().width;
+
+      genreText
+        .attr("x", d.y + 35)
+        .attr("y", d.x + 9)
+        .text(() => {
+          return `Genre: ${data.track_genre}`;
+        });
+
+      const genreTextWidth = genreText.node().getBBox().width;
+      if (genreTextWidth >= maxTextWidth) {
+        maxTextWidth = genreTextWidth;
+      }
+      bpmText
+        .attr("x", d.y + 35)
+        .attr("y", d.x + 31)
+        .text(() => {
+          return `BPM: ${data.tempo}`;
+        });
+      const bpmTextWidth =bpmText.node().getBBox().width;
+      if (bpmTextWidth >= maxTextWidth) {
+        maxTextWidth = bpmTextWidth;
+      }
+
+      valenceText
+        .attr("x", d.y + 35)
+        .attr("y", d.x + 51)
+        .text(() => {
+          return `Valence:: ${data.valence}`;
+        });
+      const valenceTextWidth =valenceText.node().getBBox().width;
+      if (valenceTextWidth >= maxTextWidth) {
+        maxTextWidth = valenceTextWidth;
+      }
+
+      toolTipRect
+        .attr("x", d.y + 30)
+        .attr("y", d.x - 29)
+        .attr("width", maxTextWidth + 10)
+        .style("visibility", "visible");
+    }
+  }
+
+  function mouseout(d) {
+    //svg.selectAll(".node").style("opacity", 0.9);
+    //svg.selectAll("path").style("opacity", 0.9);
+    if (d.data.toolTipData) {
+      const circle = d3.select(this).select(".node");
+      circle.style("r", 10).style("fill", "#fff");
+      //toolTipG.style("opacity", 0);
+      toolTipRect.style("visibility", "hidden");
+      toolTipText.style("visibility", "hidden");
+    }
   }
 }
 

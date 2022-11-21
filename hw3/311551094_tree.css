@@ -31,8 +31,9 @@ svg {
 }
 
 #column {
-  font-size: 1rem;
+  font-size: 1.3rem;
   font-weight: bold;
+  margin-bottom: 10px;
 }
 
 #column-artist{
@@ -44,5 +45,22 @@ svg {
 }
 
 #column-track{
-  margin-left: 125px;
+  margin-left: 120px;
+}
+
+#rectTooltip {
+  height: 90px;
+  fill: #000;  
+  stroke: #4fb9b5;
+  stroke-width: 3px;
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+#textTooltip {
+  fill: #f2a412;
+
+  font-size: 18px;
+  align-content: center;
+  pointer-events: none;
 }
