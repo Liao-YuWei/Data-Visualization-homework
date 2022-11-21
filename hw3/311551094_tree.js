@@ -8,9 +8,9 @@ let tree_json;
 let num_song_filter = 1;
 
 // Set the dimensions and margins of the diagram
-var margin = {top: 0, right: 90, bottom: 30, left: 90},
+var margin = {top: 0, right: 90, bottom: 25, left: 90},
     width = 960 - margin.left - margin.right,
-    height = 580 - margin.top - margin.bottom;
+    height = 560 - margin.top - margin.bottom;
 
 // append the svg object to the body of the page
 // appends a 'group' element to 'svg'

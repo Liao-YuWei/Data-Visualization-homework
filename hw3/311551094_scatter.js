@@ -62,7 +62,7 @@ const render = () => {
   /**
    * Draw Scatter Plot
    */
-  const margin = { top: 30, right: 110, bottom: 88, left: 80};
+  const margin = { top: 20, right: 30, bottom: 88, left: 80};
   const innerWidth = width - margin.left - margin.right;
   const innerHeight = height - margin.top - margin.bottom;
 
@@ -326,7 +326,7 @@ const drawScatterPlot = (props) => {
   function mouseover(d) {
     dx = xScale(xValue(d))
     dy = yScale(yValue(d))
-    console.log(dx, dy)
+
     const el = d3.select(this);
     el.style("r", 8);
 

@@ -1,6 +1,6 @@
 :root {
   --width: 940px;
-  --height: 450px;
+  --height: 420px;
 }
   
 body {
@@ -58,6 +58,8 @@ circle {
 #number-data {
   width: var(--width);
   text-align: center;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 
 #rectTooltip {
@@ -74,4 +76,9 @@ circle {
   font-size: 18px;
   align-content: center;
   pointer-events: none;
+}
+
+#menu-link{
+  font-size: 1.3rem;
+  font-weight: bold;
 }
