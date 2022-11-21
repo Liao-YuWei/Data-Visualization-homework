@@ -4,10 +4,13 @@
     <title>HW3 Spotify Tracks Dataset</title>
     <link rel="stylesheet" href="311551094_tree.css">
     <script src="https://unpkg.com/d3@5.6.0/dist/d3.min.js"></script>
-    <!-- <script src="https://d3js.org/d3.v3.min.js"></script> -->
   </head>
   <body>
-    <!-- <svg id="collapsible-tree"></svg> -->
+    <div id="enter-box">
+      <span>Top 10 artists with at least</span>
+      <input type="text" id="num-song" name="num-song" value="1"> songs in dataset (Enter a number from 1 to 100)
+      <button onclick="set_num_song_filter()">Enter</button>
+    </div>
     <p id="column">
       <span id="column-artist">Artist</span>
       <span id="column-album">Album</span>

@@ -12,10 +12,12 @@ let columns;
 let artists_popularity;
 let tree_json;
 
+let num_song_filter = 1;
+
 // Set the dimensions and margins of the diagram
 var margin = {top: 0, right: 90, bottom: 30, left: 90},
     width = 960 - margin.left - margin.right,
-    height = 600 - margin.top - margin.bottom;
+    height = 580 - margin.top - margin.bottom;
 
 // append the svg object to the body of the page
 // appends a 'group' element to 'svg'
@@ -24,8 +26,7 @@ var svg = d3.select("body").append("svg")
     .attr("width", width + margin.right + margin.left)
     .attr("height", height + margin.top + margin.bottom)
   .append("g")
-    .attr("transform", "translate("
-          + margin.left + "," + margin.top + ")");
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 var i = 0,
     duration = 750,
@@ -85,7 +86,12 @@ function split_multiple_artists_data(data) {
   return data;
 }
 
-function artists_popularity_order(data) {
+function set_num_song_filter(){
+  num_song_filter = document.getElementById('num-song').value;
+  artists_popularity_order(data,num_song_filter)
+}
+
+function artists_popularity_order(data,num_song_filter) {
   var popularities = data.reduce((acc, e)=>{
     if(!acc[e.artists]) {
       acc[e.artists] = {'count': 1, 'total_popularity': e.popularity}
@@ -106,7 +112,15 @@ function artists_popularity_order(data) {
   popularities.sort(function(first, second) {
     return second['averege_popularity']  - first['averege_popularity'] ;
   });
+  popularities = popularities.filter((item) => {
+    if(item['count'] < num_song_filter) {
+      return false;
+    }
+    return true;
+  });
   //console.log(popularities);
+  tree_json = create_tree_json(popularities, data)
+  read_json(tree_json)
 
   return popularities;
 }
@@ -212,7 +226,7 @@ function create_tree_json(artists_popularity, data) {
       "children": album_list
     });
   };
-  console.log(tree_json)
+  //console.log(tree_json)
 
   return tree_json;
 }
@@ -298,7 +312,6 @@ function update(source) {
         return d._children ? "lightsteelblue" : "#fff";
     })
     .attr('cursor', 'pointer');
-
 
   // Remove any exiting nodes
   var nodeExit = node.exit().transition()
@@ -492,9 +505,9 @@ d3.csv('http://vis.lab.djosix.com:2020/data/spotify_tracks.csv')
     columns[0] = 'number';
 
     data = split_multiple_artists_data(data);
-    artists_popularity = artists_popularity_order(data);
-    tree_json = create_tree_json(artists_popularity, data);
-    read_json(tree_json)
+    artists_popularity = artists_popularity_order(data, num_song_filter);
+    /*tree_json = create_tree_json(artists_popularity, data);
+    read_json(tree_json)*/
     
     //render();
 });

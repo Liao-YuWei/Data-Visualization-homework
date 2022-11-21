@@ -30,6 +30,16 @@ svg {
   stroke-width: 2px;
 }
 
+#enter-box {
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+
+#num-song {
+  width: 50px;
+  text-align: center;
+}
+
 #column {
   font-size: 1.3rem;
   font-weight: bold;
