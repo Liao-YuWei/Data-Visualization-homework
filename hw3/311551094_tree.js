@@ -274,7 +274,7 @@ function update(source) {
     })
     .on('click', click)
     .on("mouseover", mouseover)
-    .on("mouseout", mouseout);;
+    .on("mouseout", mouseout);
 
   // Add Circle for the nodes
   nodeEnter.append('circle')
