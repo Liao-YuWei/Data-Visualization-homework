@@ -1,0 +1,14 @@
+:root {
+  --width: 940px;
+  --height: 450px;
+}
+  
+body {
+  margin: 0px;
+  overflow: hidden;
+}
+  
+svg {
+  width: var(--width);
+  height: var(--height);
+}
