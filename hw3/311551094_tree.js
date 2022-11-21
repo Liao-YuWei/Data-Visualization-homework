@@ -1,10 +1,3 @@
-/*const svg = d3.select('svg#scatter-plot');
-
-const width = parseInt(getComputedStyle(document.querySelector(':root'))
-    .getPropertyValue('--width'));
-const height = parseInt(getComputedStyle(document.querySelector(':root'))
-    .getPropertyValue('--height'));*/
-
 let unfiltered_data;
 let data;
 let columns;
@@ -34,20 +27,6 @@ var i = 0,
 
 // declares a tree layout and assigns the size
 var treemap = d3.tree().size([height, width]);
-
-/*const render = () => {
-  const margin = { top: 30, right: 110, bottom: 88, left: 80};
-  const innerWidth = width - margin.left - margin.right;
-  const innerHeight = height - margin.top - margin.bottom;
-
-  const g = svg.selectAll('.container').data([null]);
-  const gEnter = g
-    .enter().append('g')
-      .attr('class', 'container')
-      .attr('transform',`translate(${margin.left},${margin.top})`);
-
-
-}*/
 
 function split_multiple_artists_data(data) {
   data.forEach(d => {
@@ -87,7 +66,23 @@ function split_multiple_artists_data(data) {
 }
 
 function set_num_song_filter(){
-  num_song_filter = document.getElementById('num-song').value;
+  var cur_num_song_filter = +document.getElementById('num-song').value;
+  if(!cur_num_song_filter) {
+    document.getElementById('num-song').value = num_song_filter;
+  }
+  else {
+    if(cur_num_song_filter < 1) {
+      num_song_filter = 1;
+      document.getElementById('num-song').value = num_song_filter;
+    }
+    else if(cur_num_song_filter > 100) {
+      num_song_filter = 100;
+      document.getElementById('num-song').value = num_song_filter;
+    }
+    else{
+      num_song_filter = cur_num_song_filter;
+    }
+  }
   artists_popularity_order(data,num_song_filter)
 }
 
@@ -265,6 +260,10 @@ function update(source) {
   // Update the nodes...
   var node = svg.selectAll('g.node')
       .data(nodes, function(d) {return d.id || (d.id = ++i); });
+  
+  node.select("text")
+    .data(nodes)
+    .text(function(d) {return d.data.name; });
 
   // Enter any new modes at the parent's previous position.
   var nodeEnter = node.enter().append('g')
@@ -465,12 +464,9 @@ function update(source) {
   }
 
   function mouseout(d) {
-    //svg.selectAll(".node").style("opacity", 0.9);
-    //svg.selectAll("path").style("opacity", 0.9);
     if (d.data.toolTipData) {
       const circle = d3.select(this).select(".node");
       circle.style("r", 10).style("fill", "#fff");
-      //toolTipG.style("opacity", 0);
       toolTipRect.style("visibility", "hidden");
       toolTipText.style("visibility", "hidden");
     }
