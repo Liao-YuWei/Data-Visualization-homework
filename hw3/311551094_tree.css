@@ -29,3 +29,20 @@ svg {
   stroke: #ccc;
   stroke-width: 2px;
 }
+
+#column {
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+#column-artist{
+  margin-left: 240px;
+}
+
+#column-album{
+  margin-left: 125px;
+}
+
+#column-track{
+  margin-left: 125px;
+}
