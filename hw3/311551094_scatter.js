@@ -299,10 +299,107 @@ const drawScatterPlot = (props) => {
       .attr('fill', d => colorScale(d.popularity))
       .attr('cx', d => xScale(xValue(d)))
       .attr('cy', d => yScale(yValue(d)))
-      .attr('r', radius);
+      .attr('r', radius)
+      .on("mouseover", mouseover)
+      .on("mouseout", mouseout);
     
   dataPoints.exit()
     .remove();
+
+  //show information when mouse hover on node
+  const toolTipG = svg.append("g");
+  const toolTipRect = toolTipG
+    .append("rect")
+    .attr("id", "rectTooltip")
+    .attr("rx", 5)
+    .style("visibility", "hidden");
+  const toolTipText = toolTipG
+    .append("text")
+    .attr("id", "textTooltip")
+    .style("visibility", "hidden");
+  const artistText = toolTipText.append("tspan");
+  const albumText = toolTipText.append("tspan");
+  const trackText = toolTipText.append("tspan");
+  const popText = toolTipText.append("tspan");
+  const genreText = toolTipText.append("tspan");
+
+  function mouseover(d) {
+    dx = xScale(xValue(d))
+    dy = yScale(yValue(d))
+    console.log(dx, dy)
+    const el = d3.select(this);
+    el.style("r", 8);
+
+    toolTipText.style("visibility", "visible");
+
+    artistText
+      .attr("x", dx + 3)
+      .attr("y", dy + 17)
+      .text(() => {
+        return `Artist: ${d.artists}`;
+      });
+
+    let maxTextWidth = artistText.node().getBBox().width;
+
+    albumText
+      .attr("x", dx + 3)
+      .attr("y", dy + 40)
+      .text(() => {
+        return `Album: ${d.album_name}`;
+      });
+
+    const albumTextWidth = albumText.node().getBBox().width;
+    if (albumTextWidth >= maxTextWidth) {
+      maxTextWidth = albumTextWidth;
+    }
+
+    trackText
+      .attr("x", dx + 3)
+      .attr("y", dy + 63)
+      .text(() => {
+        return `Track: ${d.track_name}`;
+      });
+
+    const trackTextWidth = trackText.node().getBBox().width;
+    if (trackTextWidth >= maxTextWidth) {
+      maxTextWidth = trackTextWidth;
+    }
+
+    popText
+      .attr("x", dx + 3)
+      .attr("y", dy + 86)
+      .text(() => {
+        return `Popularity: ${d.popularity}`;
+      });
+    const popTextWidth =popText.node().getBBox().width;
+    if (popTextWidth >= maxTextWidth) {
+      maxTextWidth = popTextWidth;
+    }
+
+    genreText
+      .attr("x", dx + 3)
+      .attr("y", dy + 109)
+      .text(() => {
+        return `Genre: ${d.track_genre}`;
+      });
+    const genreTextWidth = genreText.node().getBBox().width;
+    if (genreTextWidth >= maxTextWidth) {
+      maxTextWidth = genreTextWidth;
+    }
+
+    toolTipRect
+      .attr("x", dx)
+      .attr("y", dy)
+      .attr("width", maxTextWidth + 15)
+      .style("visibility", "visible");
+  }
+
+  function mouseout(d) {
+    const circle = d3.select(this);
+    circle.style("r", radius);
+    toolTipRect.style("visibility", "hidden");
+    toolTipText.style("visibility", "hidden");
+  }
 }
 
 d3.csv('http://vis.lab.djosix.com:2020/data/spotify_tracks.csv')
