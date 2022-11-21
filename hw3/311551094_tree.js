@@ -14,9 +14,9 @@ let options = ['duration_s', 'danceability', 'energy', 'key',
               'instrumentalness', 'liveness', 'valence', 'tempo', 'time_signature']
 
 let artists_popularity;
+let tree_json;
 
 const render = () => {
-
   /**
    * Draw Collapsible tree
    */
@@ -91,9 +91,113 @@ function artists_popularity_order(data) {
   popularities.sort(function(first, second) {
     return second['averege_popularity']  - first['averege_popularity'] ;
   });
-  //console.log(popularities)
+  //console.log(popularities);
 
   return popularities;
+}
+
+function create_tree_json(artists_popularity, data) {
+  var tree_json = {};
+  tree_json["name"] = "Top 10 artists";
+  tree_json["children"] = [];
+  for(i = 0; i < 10; i++){
+    current_artist = artists_popularity[i]['artist']
+    current_artist_list = [];
+    data.forEach(d => {
+      if(d['artists'] === current_artist){
+        current_artist_list.push({'number': d['number'],
+        'track_id': d['track_id'], 
+        'artists': current_artist,
+        'album_name': d['album_name'],
+        'track_name': d['track_name'],
+        'popularity': d['popularity'],
+        'duration_s': d['duration_s'],
+        'explicit': d['explicit'],
+        'danceability': d['danceability'],
+        'energy': d['energy'],
+        'key': d['key'],
+        'loudness': d['loudness'],
+        'mode': d['mode'],
+        'speechiness': d['speechiness'],
+        'acousticness': d['acousticness'],
+        'instrumentalness': d['instrumentalness'],
+        'liveness': d['liveness'],
+        'valence': d['valence'],
+        'tempo': d['tempo'],
+        'time_signature': d['time_signature'],
+        'track_genre': d['track_genre']
+        });
+      }
+    });
+    //console.log(current_artist_list);
+
+    album_list = [];
+    current_artist_list.forEach(d => {
+      if(album_list.some(e => e['name'] === d['album_name'])){
+        album_list.forEach(a => {
+          if(a['name'] === d['album_name']){
+            a['children'].push({'number': d['number'],
+                                'track_id': d['track_id'], 
+                                'artists': current_artist,
+                                'album_name': d['album_name'],
+                                'name': d['track_name'],
+                                'popularity': d['popularity'],
+                                'duration_s': d['duration_s'],
+                                'explicit': d['explicit'],
+                                'danceability': d['danceability'],
+                                'energy': d['energy'],
+                                'key': d['key'],
+                                'loudness': d['loudness'],
+                                'mode': d['mode'],
+                                'speechiness': d['speechiness'],
+                                'acousticness': d['acousticness'],
+                                'instrumentalness': d['instrumentalness'],
+                                'liveness': d['liveness'],
+                                'valence': d['valence'],
+                                'tempo': d['tempo'],
+                                'time_signature': d['time_signature'],
+                                'track_genre': d['track_genre']})
+          }
+        })
+      }
+      else{
+        album_list.push({
+          "name": d['album_name'],
+          "children": [{'number': d['number'],
+                        'track_id': d['track_id'], 
+                        'artists': current_artist,
+                        'album_name': d['album_name'],
+                        'name': d['track_name'],
+                        'popularity': d['popularity'],
+                        'duration_s': d['duration_s'],
+                        'explicit': d['explicit'],
+                        'danceability': d['danceability'],
+                        'energy': d['energy'],
+                        'key': d['key'],
+                        'loudness': d['loudness'],
+                        'mode': d['mode'],
+                        'speechiness': d['speechiness'],
+                        'acousticness': d['acousticness'],
+                        'instrumentalness': d['instrumentalness'],
+                        'liveness': d['liveness'],
+                        'valence': d['valence'],
+                        'tempo': d['tempo'],
+                        'time_signature': d['time_signature'],
+                        'track_genre': d['track_genre']
+          }]
+        });
+      }
+    });
+    //console.log(album_list);
+
+    tree_json["children"].push({
+      "name": current_artist,
+      "children": album_list
+    });
+  };
+  //console.log(tree_json)
+
+  return tree_json;
 }
 
 d3.csv('http://vis.lab.djosix.com:2020/data/spotify_tracks.csv')
@@ -124,9 +228,9 @@ d3.csv('http://vis.lab.djosix.com:2020/data/spotify_tracks.csv')
     columns[0] = 'number';
 
     data = split_multiple_artists_data(data);
-    console.log(data);
-
     artists_popularity = artists_popularity_order(data);
+
+    tree_json = create_tree_json(artists_popularity, data);
     
     render();
 });
