@@ -56,5 +56,6 @@ circle {
 }
 
 #number-data {
+  width: var(--width);
   text-align: center;
 }
