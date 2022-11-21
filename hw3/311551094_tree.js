@@ -9,10 +9,6 @@ let unfiltered_data;
 let data;
 let columns;
 
-let options = ['duration_s', 'danceability', 'energy', 'key',
-              'loudness', 'mode','speechiness', 'acousticness',
-              'instrumentalness', 'liveness', 'valence', 'tempo', 'time_signature']
-
 let artists_popularity;
 let tree_json;
 
