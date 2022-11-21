@@ -5,6 +5,7 @@ const width = parseInt(getComputedStyle(document.querySelector(':root'))
 const height = parseInt(getComputedStyle(document.querySelector(':root'))
     .getPropertyValue('--height'));
 
+let unfiltered_data;
 let data;
 let columns;
 
@@ -122,7 +123,7 @@ const continuousLegend = (props) => {
 
   var legendheight = 40,
       legendwidth = 700,
-      margin = {top: 10, right: 60, bottom: 10, left: 240};
+      margin = {top: 10, right: 60, bottom: 10, left: 265};
 
   var canvas = d3.select("#legend")
     .style("height", legendheight + "px")
@@ -176,7 +177,7 @@ const continuousLegend = (props) => {
 };
 
 function draggableSlider() {
-  const margin = {top: 0, right: 60, bottom: 0, left: 225}
+  const margin = {top: 0, right: 60, bottom: 0, left: 250}
 
   const slider_svg = d3.select('svg#slider-range');
   const g = slider_svg.selectAll('.container').data([null]);
@@ -306,8 +307,8 @@ const drawScatterPlot = (props) => {
 
 d3.csv('http://vis.lab.djosix.com:2020/data/spotify_tracks.csv')
   .then(loadedData => {
-    data = loadedData;
-    data.forEach(d => {
+    unfiltered_data = loadedData;
+    unfiltered_data.forEach(d => {
       d["number"] = +d[""];
       delete d[""];
       d["popularity"] = +d["popularity"];
@@ -327,7 +328,8 @@ d3.csv('http://vis.lab.djosix.com:2020/data/spotify_tracks.csv')
       d["tempo"] = +d["tempo"];
       d["time_signature"] = +d["time_signature"];
     });
-    columns = Object.values(data.columns);
+    data = [...new Map(unfiltered_data.map(item => [item["track_id"], item])).values()]
+    columns = Object.values(unfiltered_data.columns);
     columns[0] = 'number';
     selectedX = options[1];
     selectedY = options[0];
