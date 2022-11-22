@@ -502,8 +502,4 @@ d3.csv('http://vis.lab.djosix.com:2020/data/spotify_tracks.csv')
 
     data = split_multiple_artists_data(data);
     artists_popularity = artists_popularity_order(data, num_song_filter);
-    /*tree_json = create_tree_json(artists_popularity, data);
-    read_json(tree_json)*/
-    
-    //render();
 });
