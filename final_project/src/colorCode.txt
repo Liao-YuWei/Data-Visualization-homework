@@ -1,0 +1,18 @@
+Normal: #A5A552
+Fighting: #984B4B
+Flying: #8080C0
+Poison: #7E3D76
+Ground: #D9B300	
+Rock:	#737300
+Bug:	#548C00
+Ghost: 	#8600FF
+Steel:	#7B7B7B
+Fire:	#F75000
+Water:	#0080FF
+Grass:	#019858
+Electric:#FFD306
+Psychic:#FF7575
+Ice:	#B9B9FF
+Dragon:	#2828FF
+Dark:	#9F5000
+Fairy:	#FFAAD5

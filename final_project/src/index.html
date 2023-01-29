@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Pokedex</title>
+    <link rel="stylesheet" href="typeView.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <!-- update the version number as needed -->
+    <!-- <script defer src="/__/firebase/9.15.0/firebase-app.js"></script> -->
+    <!-- include only the Firebase features as you need -->
+    <!-- <script defer src="/__/firebase/9.15.0/firebase-auth.js"></script>
+    <script defer src="/__/firebase/9.15.0/firebase-database.js"></script>
+    <script defer src="/__/firebase/9.15.0/firebase-messaging.js"></script>
+    <script defer src="/__/firebase/9.15.0/firebase-storage.js"></script> -->
+    <!-- initialize the SDK after all desired features are loaded -->
+    <!-- <script defer src="/__/firebase/init.js"></script> -->
+  </head>
+  <body>
+    <script src="https://d3js.org/d3.v4.js"></script>
+    <div id="navBar" style="background-color: #ACD6FF;">
+      <ul class="nav justify-content-end">
+          <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="./pokemon_map/index-map.html">Map View</a>
+            </li>
+          <li class="nav-item">
+            <a class="nav-link disabled">Type View</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="pokemonPage.html">Pokemon View</a>
+            </li>
+      </ul>
+    </div>
+
+    <div id = "choiceBox">
+      <div class = "propertyB">
+        <!---屬性check box--->
+        <span class="badge text-bg-primary">Type</span> <br>
+        <input type="checkbox" id="Normal" name="Normal" checked>
+        <label for="Normal" style="color: #A5A552;">Normal</label>
+        <input type="checkbox" id="Fighting" name="Fighting">
+        <label for="Fighting" style="color: #984B4B;">Fighting</label>
+        <input type="checkbox" id="Flying" name="Flying">
+        <label for="Flying" style="color: #8080C0;">Flying</label>
+        <input type="checkbox" id="Poison" name="Poison">
+        <label for="Poison" style="color: 	#7E3D76;">Poison</label>
+        <input type="checkbox" id="Ground" name="Ground">
+        <label for="Ground" style="color: 	#D9B300	;">Ground</label>
+        <input type="checkbox" id="Rock" name="Rock">
+        <label for="Rock" style="color: 	#737300;">Rock</label>
+        <input type="checkbox" id="Bug" name="Bug">
+        <label for="Bug" style="color: 	#548C00;">Bug</label>
+        <input type="checkbox" id="Ghost" name="Ghost">
+        <label for="Ghost" style="color:	#8600FF">Ghost</label>
+        <input type="checkbox" id="Steel" name="Steel">
+        <label for="Steel" style="color: 	#7B7B7B;">Steel</label>
+        <input type="checkbox" id="Fire" name="Fire">
+        <label for="Fire" style="color: 	#F75000;">Fire</label>
+        <input type="checkbox" id="Water" name="Water">
+        <label for="Water" style="color: 	#0080FF;">Water</label>
+        <input type="checkbox" id="Grass" name="Grass">
+        <label for="Grass" style="color: 	#019858;">Grass</label>
+        <input type="checkbox" id="Electric" name="Electric">
+        <label for="Electric" style="color: 	#FFD306;">Electric</label>
+        <input type="checkbox" id="Psychic" name="Psychic">
+        <label for="Psychic" style="color: 		#FF7575;">Psychic</label>
+        <input type="checkbox" id="Ice" name="Ice">
+        <label for="Ice" style="color: 	#B9B9FF;">Ice</label>
+        <input type="checkbox" id="Dragon" name="Dragon">
+        <label for="Dragon" style="color: 	#2828FF;">Dragon</label>
+        <input type="checkbox" id="Dark" name="Dark">
+        <label for="Dark" style="color: 	#9F5000;">Dark</label>
+        <input type="checkbox" id="Fairy" name="Fairy">
+        <label for="Fairy" style="color: 	#FFAAD5;">Fairy</label>
+      </div>
+      <div class="axisB">
+
+        <div class="axisForAxis">
+          <form>
+            <label for="axis1">axis 1:</label>
+            <select name="axis1" id="axis1">
+              <option value="HP">Hp</option>
+              <option value="Attack">Attack</option>
+              <option value="Defense">Defense</option>
+              <option value="Special Attack">SpecialAttack</option>
+              <option value="Special Defense">SpecialDefense</option>
+              <option value="Speed">Speed</option>
+            </select>
+          </form>
+
+          <form>
+            <label for="axis2">axis 2:</label>
+            <select name="axis2" id="axis2">
+              <option value="HP">Hp</option>
+              <option value="Attack" selected>Attack</option>
+              <option value="Defense">Defense</option>
+              <option value="Special Attack">SpecialAttack</option>
+              <option value="Special Defense">SpecialDefense</option>
+              <option value="Speed">Speed</option>
+            </select>
+          </form>
+
+          <form>
+            <label for="axis3">axis 3:</label>
+            <select name="axis3" id="axis3">
+              <option value="HP">Hp</option>
+              <option value="Attack">Attack</option>
+              <option value="Defense" selected>Defense</option>
+              <option value="Special Attack">SpecialAttack</option>
+              <option value="Special Defense">SpecialDefense</option>
+              <option value="Speed">Speed</option>
+            </select>
+          </form>
+
+          <form>
+            <label for="axis4">axis 4:</label>
+            <select name="axis4" id="axis4">
+              <option value="HP">Hp</option>
+              <option value="Attack">Attack</option>
+              <option value="Defense">Defense</option>
+              <option value="Special Attack" selected>SpecialAttack</option>
+              <option value="Special Defense">SpecialDefense</option>
+              <option value="Speed">Speed</option>
+            </select>
+          </form>
+
+          <form>
+            <label for="axis5">axis 5:</label>
+            <select name="axis5" id="axis5">
+              <option value="HP">Hp</option>
+              <option value="Attack">Attack</option>
+              <option value="Defense">Defense</option>
+              <option value="Special Attack">SpecialAttack</option>
+              <option value="Special Defense" selected>SpecialDefense</option>
+              <option value="Speed">Speed</option>
+            </select>
+          </form>
+
+          <form>
+            <label for="axis6">axis 6:</label>
+            <select name="axis6" id="axis6">
+              <option value="HP">Hp</option>
+              <option value="Attack">Attack</option>
+              <option value="Defense">Defense</option>
+              <option value="Special Attack">SpecialAttack</option>
+              <option value="Special Defense">SpecialDefense</option>
+              <option value="Speed" selected>Speed</option>
+            </select>
+          </form>
+
+        </div>
+
+        <div class="axisForscatter">
+          <form>
+            <label for="axisX">axis X:</label>
+            <select name="axisX" id="axisX">
+              <option value="HP">Hp</option>
+              <option value="Attack">Attack</option>
+              <option value="Defense">Defense</option>
+              <option value="Special Attack">SpecialAttack</option>
+              <option value="Special Defense">SpecialDefense</option>
+              <option value="Speed">Speed</option>
+            </select>
+          </form>
+          <form>
+            <label for="axisY">axis Y:</label>
+            <select name="axisY" id="axisY">
+              <option value="HP">Hp</option>
+              <option value="Attack" selected>Attack</option>
+              <option value="Defense">Defense</option>
+              <option value="Special Attack">SpecialAttack</option>
+              <option value="Special Defense">SpecialDefense</option>
+              <option value="Speed">Speed</option>
+            </select>
+          </form>
+        </div>
+        <button type="button" class="btn btn-primary" style="padding: 10px; margin: 10px;" id="submit">submit</button>
+      </div>
+    </div>
+    
+    <div id = "graphBox">
+      <div id = "axisDia">
+        
+      </div>
+      <div id = "scatterPlot">
+        
+      </div>
+    </div>
+    <script src="typeDiagram.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+        // // The Firebase SDK is initialized and available here!
+        //
+        // firebase.auth().onAuthStateChanged(user => { });
+        // firebase.database().ref('/path/to/ref').on('value', snapshot => { });
+        // firebase.messaging().requestPermission().then(() => { });
+        // firebase.storage().ref('/path/to/ref').getDownloadURL().then(() => { });
+        //
+        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+
+        try {
+          let app = firebase.app();
+          let features = ['auth', 'database', 'messaging', 'storage'].filter(feature => typeof app[feature] === 'function');
+          document.getElementById('load').innerHTML = `Firebase SDK loaded with ${features.join(', ')}`;
+        } catch (e) {
+          console.error(e);
+          document.getElementById('load').innerHTML = 'Error loading the Firebase SDK, check the console.';
+        }
+      });
+    </script>
+  </body>
+</html>

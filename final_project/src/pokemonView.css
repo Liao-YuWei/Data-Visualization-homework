@@ -1,0 +1,122 @@
+#searchBox{
+    display: flex;
+    justify-content: center;
+    padding: 5px;
+}
+#searchGroup{
+    background-color: #ACD6FF;
+    display: flex;
+    padding: 20px;
+    width: 500px;
+    height: 90px;
+    border-radius: 0 10px 0 10px;
+}
+#mainContainer{
+    display: flex;
+    margin: 5px;
+    padding: 5px;
+    justify-content: center;
+}
+#column{
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    margin: 5px;
+    background-color: #d8ebff;
+    width: 500px;
+    height: 775px;
+}
+#pic{
+    width: 480px;
+    height: 220px;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    border-radius: 0 10px 0 10px;
+}
+#nametag{
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+}
+#typeBox{
+    display: flex;
+    justify-content: center;
+    width: 480px;
+    height: 60px;
+}
+#type1{
+   width: 200px;
+   height: 40px;
+   display: flex;
+   justify-content: center;
+   color: white;
+   padding: 5px;
+   margin: 5px;
+   border-radius: 0 10px 0 10px;
+}
+#type2{
+    width: 200px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    color: white;
+    padding: 5px;
+    margin: 5px;
+    border-radius: 0 10px 0 10px;
+ }
+ #skillName{
+    display: flex;
+    justify-content: center;
+    padding: 5px;
+    margin-left: 10px;
+    color: #0000a0;
+ }
+ #skillType{
+    display: flex;
+    justify-content: center;
+    border-radius: 0 10px 0 10px;
+    width: 200px;
+    height: 40px;
+    padding: 5px;
+    color: white;
+ }
+ #Damage{
+    display: flex;
+    justify-content: center;
+    padding: 5px;
+    color: #0000a0;
+ }
+ #skillBox{
+    display: flex;
+    justify-content: center;
+ }
+ #skillCon{
+    width: 480px;
+    height: 250px;
+    background-color: white;
+    border-radius: 0 10px 0 10px;
+    padding: 10px;
+ }
+ #statsChart{
+    display: flex;
+    justify-content: center;
+    background-color: white;
+    border-radius: 0 10px 0 10px;
+ }
+ #circular_bar{
+    justify-content: center;
+    background-color: white;
+    border-radius: 0 10px 0 10px;
+    margin-bottom: 10px;
+ }
+ #collapsible_tree{
+    justify-content: center;
+    background-color: white;
+    border-radius: 0 10px 0 10px;
+ }
+ #pokemon_map{
+   justify-content: center;
+   background-color: white;
+   border-radius: 0 10px 0 10px;
+}

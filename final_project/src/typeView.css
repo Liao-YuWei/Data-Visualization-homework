@@ -1,0 +1,71 @@
+#choiceBox{
+    background-color:#ACD6FF; 
+    width: 1200px; 
+    height: 240px;
+    margin: 20px;
+    margin-left: 12%;
+    margin-right: 12%;
+    display: flex;
+    flex-direction: column;
+    justify-self: center;
+}
+
+input[type="checkbox"]{
+    margin: 5px;
+}
+
+.propertyB{
+    margin: 10px;
+    height: 90px;
+    padding: 3px;
+    background-color: aliceblue;
+}
+
+.axisB{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 10px;
+}
+
+.axisForAxis{
+    margin: 5px;
+    padding: 2px;
+    width: 600px;
+    height: 100px;
+    background-color: aliceblue;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.axisForscatter{
+    margin: 5px;
+    padding: 5px;
+    width: 400px;
+    height: 100px;
+    background-color: aliceblue;
+    display: flex;
+    justify-content: center;
+}
+
+#graphBox{
+    display: flex;
+    justify-content: center;
+}
+
+#axisDia{
+    background-color: #ECF5FF;
+    margin: 5px;
+    width: 900px;
+    height: 360px;
+    display: flex;
+    justify-content: center;
+}
+
+#scatterPlot{
+    background-color: #ECF5FF;
+    margin: 10px;
+    width: 450px;
+    height: 360px;
+}

@@ -1,0 +1,33 @@
+.node circle {
+  fill: #bfbbb8;
+  stroke: #000000;
+  stroke-width: 4.5px;
+}
+
+.node text {
+  font: 13px sans-serif;
+  font-weight: bold;
+}
+
+.link {
+  fill: none;
+  stroke: #ccc;
+  stroke-width: 2px;
+}
+
+#rectTooltip {
+  height: 60px;
+  fill: #000;  
+  stroke: #4fb9b5;
+  stroke-width: 4px;
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+#textTooltip {
+  fill: #f2a412;
+  font-size: 16px;
+  font-weight: 650;
+  align-content: center;
+  pointer-events: none;
+}

@@ -1,0 +1,165 @@
+Pokemon,Type,HP,Attack,Defense,Special Attack,Special Defense,Speed
+Annihilape,fighting,110 ,115 ,80 ,50 ,90 ,90 
+Annihilape,ghost,110 ,115 ,80 ,50 ,90 ,90 
+Arboliva,grass,78 ,69 ,90 ,125 ,109 ,39 
+Arboliva,normal,78 ,69 ,90 ,125 ,109 ,39 
+Arctibax,ice,90 ,95 ,66 ,45 ,65 ,62 
+Arctibax,dragon,90 ,95 ,66 ,45 ,65 ,62 
+Armarouge,fire,85 ,60 ,100 ,125 ,80 ,75 
+Armarouge,psychic,85 ,60 ,100 ,125 ,80 ,75 
+Baxcalibur,ice,115 ,145 ,92 ,75 ,86 ,87 
+Baxcalibur,dragon,115 ,145 ,92 ,75 ,86 ,87 
+Bellibolt,electric,109 ,64 ,91 ,103 ,83 ,45 
+Bombirdier,flying,70 ,103 ,85 ,60 ,85 ,82 
+Brambleghast,grass,55 ,115 ,70 ,80 ,70 ,90 
+Brambleghast,ghost,55 ,115 ,70 ,80 ,70 ,90 
+Bramblin,grass,40 ,65 ,30 ,45 ,35 ,60 
+Bramblin,ghost,40 ,65 ,30 ,45 ,35 ,60 
+Brute Bonnet,dark,111 ,127 ,99 ,79 ,99 ,55 
+Brute Bonnet,grass,111 ,127 ,99 ,79 ,99 ,55 
+Capsakid,grass,50 ,62 ,40 ,62 ,40 ,50 
+Ceruledge,fire,75 ,125 ,80 ,60 ,100 ,85 
+Ceruledge,ghost,75 ,125 ,80 ,60 ,100 ,85 
+Cetitan,ice,170 ,113 ,65 ,45 ,55 ,73 
+Cetoddle,ice,108 ,68 ,45 ,30 ,40 ,43 
+Charcadet,fire,40 ,50 ,40 ,50 ,40 ,35 
+Chi-Yu,dark,55 ,80 ,80 ,135 ,120 ,100 
+Chi-Yu,fire,55 ,80 ,80 ,135 ,120 ,100 
+Chien-Pao,dark,80 ,120 ,80 ,90 ,65 ,135 
+Chien-Pao,ice,80 ,120 ,80 ,90 ,65 ,135 
+Clodsire,ground,130 ,75 ,60 ,45 ,100 ,20 
+Clodsire,poison,130 ,75 ,60 ,45 ,100 ,20 
+Crocalor,fire,81 ,55 ,78 ,90 ,58 ,49 
+Cyclizar,dragon,70 ,95 ,65 ,85 ,65 ,121 
+Cyclizar,normal,70 ,95 ,65 ,85 ,65 ,121 
+Dachsbun,fairy,57 ,80 ,115 ,50 ,80 ,95 
+Dolliv,normal,52 ,53 ,60 ,78 ,78 ,33 
+Dolliv,grass,52 ,53 ,60 ,78 ,78 ,33 
+Dondozo,water,150 ,100 ,115 ,65 ,65 ,35 
+Dundunsparce,normal,125 ,100 ,80 ,85 ,75 ,55 
+Espathra,psychic,95 ,60 ,60 ,101 ,60 ,105 
+Farigiraf,normal,120 ,90 ,70 ,110 ,70 ,60 
+Farigiraf,psychic,120 ,90 ,70 ,110 ,70 ,60 
+Fidough,fairy,37 ,55 ,70 ,30 ,55 ,65 
+Finizen,water,70 ,45 ,40 ,45 ,40 ,75 
+Flamigo,fighting,82 ,115 ,74 ,75 ,64 ,90 
+Flamigo,flying,82 ,115 ,74 ,75 ,64 ,90 
+Flittle,psychic,30 ,35 ,30 ,55 ,30 ,75 
+Floragato,grass,61 ,80 ,63 ,60 ,63 ,83 
+Flutter Mane,fairy,55 ,55 ,55 ,135 ,135 ,135 
+Flutter Mane,ghost,55 ,55 ,55 ,135 ,135 ,135 
+Frigibax,ice,65 ,75 ,45 ,35 ,45 ,55 
+Frigibax,dragon,65 ,75 ,45 ,35 ,45 ,55 
+Fuecoco,fire,67 ,45 ,59 ,63 ,40 ,36 
+Garganacl,rock,100 ,100 ,130 ,45 ,90 ,35 
+Gholdengo,steel,87 ,60 ,95 ,133 ,91 ,84 
+Gholdengo,ghost,87 ,60 ,95 ,133 ,91 ,84 
+Gimmighoul,ghost,45 ,30 ,70 ,75 ,70 ,10 
+Glimmet,poison,48 ,35 ,42 ,105 ,60 ,60 
+Glimmet,rock,48 ,35 ,42 ,105 ,60 ,60 
+Glimmora,rock,83 ,55 ,90 ,130 ,81 ,86 
+Glimmora,poison,83 ,55 ,90 ,130 ,81 ,86 
+Grafaiai,poison,63 ,95 ,65 ,80 ,72 ,110 
+Grafaiai,normal,63 ,95 ,65 ,80 ,72 ,110 
+Great Tusk,ground,115 ,131 ,131 ,53 ,53 ,87 
+Great Tusk,fighting,115 ,131 ,131 ,53 ,53 ,87 
+Greavard,ghost,50 ,61 ,60 ,30 ,55 ,34 
+Houndstone,ghost,72 ,101 ,100 ,50 ,97 ,68 
+Iron Bundle,ice,56 ,80 ,114 ,124 ,60 ,136 
+Iron Bundle,water,56 ,80 ,114 ,124 ,60 ,136 
+Iron Hands,fighting,154 ,140 ,108 ,50 ,68 ,50 
+Iron Hands,electric,154 ,140 ,108 ,50 ,68 ,50 
+Iron Jugulis,dark,94 ,80 ,86 ,122 ,80 ,108 
+Iron Jugulis,flying,94 ,80 ,86 ,122 ,80 ,108 
+Iron Moth,poison,80 ,70 ,60 ,140 ,110 ,110 
+Iron Moth,fire,80 ,70 ,60 ,140 ,110 ,110 
+Iron Thorns,electric,100 ,134 ,110 ,70 ,84 ,72 
+Iron Thorns,rock,100 ,134 ,110 ,70 ,84 ,72 
+Iron Treads,ground,90 ,112 ,120 ,72 ,70 ,106 
+Iron Treads,steel,90 ,112 ,120 ,72 ,70 ,106 
+Iron Valiant,fighting,74 ,130 ,90 ,120 ,60 ,116 
+Iron Valiant,fairy,74 ,130 ,90 ,120 ,60 ,116 
+Kilowattrel,flying,70 ,70 ,60 ,105 ,60 ,125 
+Kilowattrel,electric,70 ,70 ,60 ,105 ,60 ,125 
+Kingambit,steel,100 ,135 ,120 ,60 ,85 ,50 
+Kingambit,dark,100 ,135 ,120 ,60 ,85 ,50 
+Klawf,rock,70 ,100 ,115 ,35 ,55 ,75 
+Koraidon,fighting,100 ,135 ,115 ,85 ,100 ,135 
+Koraidon,dragon,100 ,135 ,115 ,85 ,100 ,135 
+Lechonk,normal,54 ,45 ,40 ,35 ,45 ,35 
+Lokix,dark,71 ,102 ,78 ,52 ,55 ,92 
+Lokix,bug,71 ,102 ,78 ,52 ,55 ,92 
+Mabosstiff,dark,80 ,120 ,90 ,60 ,70 ,85 
+Maschiff,dark,60 ,78 ,60 ,40 ,51 ,51 
+Maushold,normal,74 ,75 ,70 ,65 ,75 ,111 
+Meowscarada,dark,76 ,110 ,70 ,81 ,70 ,123 
+Meowscarada,grass,76 ,110 ,70 ,81 ,70 ,123 
+Miraidon,dragon,100 ,85 ,100 ,135 ,115 ,135 
+Miraidon,electric,100 ,85 ,100 ,135 ,115 ,135 
+Nacli,rock,55 ,55 ,75 ,35 ,35 ,25 
+Naclstack,rock,60 ,60 ,100 ,35 ,65 ,35 
+Nymble,bug,33 ,46 ,40 ,21 ,25 ,45 
+Oinkologne,normal,110 ,100 ,75 ,59 ,80 ,65 
+Orthworm,steel,70 ,85 ,145 ,60 ,55 ,65 
+Palafin,water,100 ,160 ,97 ,106 ,87 ,100 
+Pawmi,electric,45 ,50 ,20 ,40 ,25 ,60 
+Pawmo,fighting,60 ,75 ,40 ,50 ,40 ,85 
+Pawmo,electric,60 ,75 ,40 ,50 ,40 ,85 
+Pawmot,electric,70 ,115 ,70 ,70 ,60 ,105 
+Pawmot,fighting,70 ,115 ,70 ,70 ,60 ,105 
+Quaquaval,water,85 ,120 ,80 ,85 ,75 ,85 
+Quaquaval,fighting,85 ,120 ,80 ,85 ,75 ,85 
+Quaxly,water,55 ,65 ,45 ,50 ,45 ,50 
+Quaxwell,water,70 ,85 ,65 ,65 ,60 ,65 
+Rabsca,bug,75 ,50 ,85 ,115 ,100 ,45 
+Rabsca,psychic,75 ,50 ,85 ,115 ,100 ,45 
+Rellor,bug,41 ,50 ,60 ,31 ,58 ,30 
+Revavroom,poison,80 ,119 ,90 ,54 ,67 ,90 
+Revavroom,steel,80 ,119 ,90 ,54 ,67 ,90 
+Roaring Moon,dark,105 ,139 ,71 ,55 ,101 ,119 
+Roaring Moon,dragon,105 ,139 ,71 ,55 ,101 ,119 
+Sandy Shocks,ground,85 ,81 ,97 ,121 ,85 ,101 
+Sandy Shocks,electric,85 ,81 ,97 ,121 ,85 ,101 
+Scovillain,grass,65 ,108 ,65 ,108 ,65 ,75 
+Scovillain,fire,65 ,108 ,65 ,108 ,65 ,75 
+Scream Tail,psychic,115 ,65 ,99 ,65 ,115 ,111 
+Scream Tail,fairy,115 ,65 ,99 ,65 ,115 ,111 
+Shroodle,normal,40 ,65 ,35 ,40 ,35 ,75 
+Shroodle,poison,40 ,65 ,35 ,40 ,35 ,75 
+Skeledirge,ghost,104 ,75 ,100 ,110 ,75 ,66 
+Skeledirge,fire,104 ,75 ,100 ,110 ,75 ,66 
+Slither Wing,fighting,85 ,135 ,79 ,85 ,105 ,81 
+Slither Wing,bug,85 ,135 ,79 ,85 ,105 ,81 
+Smoliv,normal,41 ,35 ,45 ,58 ,51 ,30 
+Smoliv,grass,41 ,35 ,45 ,58 ,51 ,30 
+Spidops,bug,60 ,79 ,92 ,52 ,86 ,35 
+Sprigatito,grass,40 ,61 ,54 ,45 ,45 ,65 
+Squawkabilly,normal,82 ,96 ,51 ,45 ,51 ,92 
+Squawkabilly,flying,82 ,96 ,51 ,45 ,51 ,92 
+Tadbulb,electric,61 ,31 ,41 ,59 ,35 ,45 
+Tandemaus,normal,50 ,50 ,45 ,40 ,45 ,75 
+Tarountula,bug,35 ,41 ,45 ,29 ,40 ,20 
+Tatsugiri,dragon,68 ,50 ,60 ,120 ,95 ,82 
+Tatsugiri,water,68 ,50 ,60 ,120 ,95 ,82 
+Ting-Lu,dark,155 ,110 ,125 ,55 ,80 ,45 
+Ting-Lu,ground,155 ,110 ,125 ,55 ,80 ,45 
+Tinkatink,fairy,50 ,45 ,45 ,35 ,64 ,58 
+Tinkatink,steel,50 ,45 ,45 ,35 ,64 ,58 
+Tinkaton,steel,85 ,75 ,77 ,70 ,105 ,94 
+Tinkaton,fairy,85 ,75 ,77 ,70 ,105 ,94 
+Tinkatuff,steel,65 ,55 ,55 ,45 ,82 ,78 
+Tinkatuff,fairy,65 ,55 ,55 ,45 ,82 ,78 
+Toedscool,grass,40 ,40 ,35 ,50 ,100 ,70 
+Toedscool,ground,40 ,40 ,35 ,50 ,100 ,70 
+Toedscruel,grass,80 ,70 ,65 ,80 ,120 ,100 
+Toedscruel,ground,80 ,70 ,65 ,80 ,120 ,100 
+Varoom,steel,45 ,70 ,63 ,30 ,45 ,47 
+Varoom,poison,45 ,70 ,63 ,30 ,45 ,47 
+Veluza,water,90 ,102 ,73 ,78 ,65 ,70 
+Veluza,psychic,90 ,102 ,73 ,78 ,65 ,70 
+Wattrel,flying,40 ,40 ,35 ,55 ,40 ,70 
+Wattrel,electric,40 ,40 ,35 ,55 ,40 ,70 
+Wiglett,water,10 ,55 ,25 ,35 ,25 ,95 
+Wo-Chien,dark,85 ,85 ,100 ,95 ,135 ,70 
+Wo-Chien,grass,85 ,85 ,100 ,95 ,135 ,70 
+Wugtrio,water,35 ,100 ,50 ,50 ,70 ,120 

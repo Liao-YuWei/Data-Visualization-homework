@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>pokemon map</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+     integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+     crossorigin=""/>
+  	<!-- Make sure you put this AFTER Leaflet's CSS -->
+   	<script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+       integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+       crossorigin=""></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+ 		<script src="https://unpkg.com/d3@5.9.2/dist/d3.min.js"></script>
+  </head>
+  <body>
+    <div id="navBar" style="background-color: #ACD6FF;">
+      <ul class="nav justify-content-end">
+          <li class="nav-item">
+              <a class="nav-link disabled">Map View</a>
+            </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="../index.html">Type View</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="../pokemonPage.html">Pokemon View</a>
+            </li>
+      </ul>
+    </div>
+    <div class="js-shapes">
+        <span class="ib"><input type="checkbox" class="type_checkbox" value="normal" id="normal"><label for="normal" style="color:#A5A552">normal</label></span>
+        <span class="ib"><input type="checkbox" class="type_checkbox" value="fighting" id="fighting"><label for="fighting" style="color:#984B4B">fighting</label></span>
+        <span class="ib"><input type="checkbox" class="type_checkbox" value="flying" id="flying"><label for="flying" style="color:#8080C0">flying</label></span>
+        <span class="ib"><input type="checkbox" class="type_checkbox" value="poison" id="poison"><label for="poison" style="color:#7E3D76">poison</label></span>
+        <span class="ib"><input type="checkbox" class="type_checkbox" value="ground" id="ground"><label for="ground" style="color:#D9B300">ground</label></span>
+        <span class="ib"><input type="checkbox" class="type_checkbox" value="rock" id="rock"><label for="rock" style="color:#737300">rock</label></span>
+        <span class="ib"><input type="checkbox" class="type_checkbox" value="bug" id="bug"><label for="bug" style="color:#548C00">bug</label></span>
+        <span class="ib"><input type="checkbox" class="type_checkbox" value="ghost" id="ghost"><label for="ghost" style="color:#8600FF">ghost</label></span>
+        <span class="ib"><input type="checkbox" class="type_checkbox" value="steel" id="steel"><label for="steel" style="color:#7B7B7B">steel</label></span>
+        <span class="ib"><input type="checkbox" class="type_checkbox" value="fire" id="fire"><label for="fire" style="color:#F75000">fire</label></span>
+        <span class="ib"><input type="checkbox" class="type_checkbox" value="water" id="water"><label for="water" style="color:#0080FF">water</label></span>
+        <span class="ib"><input type="checkbox" class="type_checkbox" value="grass" id="grass"><label for="grass" style="color:#019858">grass</label></span>
+        <span class="ib"><input type="checkbox" class="type_checkbox" value="electric" id="electric"><label for="electric" style="color:#FFD306">electric</label></span>
+        <span class="ib"><input type="checkbox" class="type_checkbox" value="psychic" id="psychic"><label for="psychic" style="color:#FF7575">psychic</label></span>
+        <span class="ib"><input type="checkbox" class="type_checkbox" value="ice" id="ice"><label for="ice" style="color:#B9B9FF">ice</label></span>
+        <span class="ib"><input type="checkbox" class="type_checkbox" value="dragon" id="dragon"><label for="dragon" style="color:#2828FF">dragon</label></span>
+        <span class="ib"><input type="checkbox" class="type_checkbox" value="dark" id="dark"><label for="dark" style="color:#9F5000">dark</label></span>
+        <span class="ib"><input type="checkbox" class="type_checkbox" value="fairy" id="fairy"><label for="fairy" style="color:#FFAAD5">fairy</label></span>
+      </div>
+  	<div  style="float:left;width:50%;">
+      <div class="range_container">
+          <span>HP</span>
+          <div class="sliders_control">
+            <input id="fromSlider_hp" type="range" value="10" min="10" max="170"/>
+            <input id="toSlider_hp" type="range" value="170" min="10" max="170"/>
+        </div>
+        <div class="form_control">
+            <div class="form_control_container">
+                <div class="form_control_container__time">Min</div>
+                <input class="form_control_container__time__input" type="number" id="fromInput_hp" value="10" min="10" max="170"/>
+            </div>
+            <div class="form_control_container">
+                <div class="form_control_container__time">Max</div>
+                <input class="form_control_container__time__input" type="number" id="toInput_hp" value="170" min="10" max="170"/>
+            </div>
+        </div>
+        <span>Attack</span>
+        <div class="sliders_control">
+            <input id="fromSlider_atk" type="range" value="30" min="30" max="160"/>
+            <input id="toSlider_atk" type="range" value="160" min="30" max="160"/>
+        </div>
+        <div class="form_control">
+            <div class="form_control_container">
+                <div class="form_control_container__time"></div>
+                <input class="form_control_container__time__input" type="number" id="fromInput_atk" value="30" min="30" max="160"/>
+            </div>
+            <div class="form_control_container">
+                <div class="form_control_container__time"></div>
+                <input class="form_control_container__time__input" type="number" id="toInput_atk" value="160" min="30" max="160"/>
+            </div>
+        </div>
+        <span>Defense</span>
+        <div class="sliders_control">
+            <input id="fromSlider_def" type="range" value="20" min="20" max="145"/>
+            <input id="toSlider_def" type="range" value="145" min="20" max="145"/>
+        </div>
+        <div class="form_control">
+            <div class="form_control_container">
+                <div class="form_control_container__time"></div>
+                <input class="form_control_container__time__input" type="number" id="fromInput_def" value="20" min="20" max="145"/>
+            </div>
+            <div class="form_control_container">
+                <div class="form_control_container__time"></div>
+                <input class="form_control_container__time__input" type="number" id="toInput_def" value="145" min="20" max="145"/>
+            </div>
+        </div>
+        <span>Special Attack</span>
+        <div class="sliders_control">
+            <input id="fromSlider_satk" type="range" value="20" min="20" max="140"/>
+            <input id="toSlider_satk" type="range" value="140" min="20" max="140"/>
+        </div>
+        <div class="form_control">
+            <div class="form_control_container">
+                <div class="form_control_container__time"></div>
+                <input class="form_control_container__time__input" type="number" id="fromInput_satk" value="20" min="20" max="140"/>
+            </div>
+            <div class="form_control_container">
+                <div class="form_control_container__time"></div>
+                <input class="form_control_container__time__input" type="number" id="toInput_satk" value="140" min="20" max="140"/>
+            </div>
+        </div>
+        <span>Special Defense</span>
+        <div class="sliders_control">
+            <input id="fromSlider_sdef" type="range" value="20" min="20" max="135"/>
+            <input id="toSlider_sdef" type="range" value="135" min="20" max="135"/>
+        </div>
+        <div class="form_control">
+            <div class="form_control_container">
+                <div class="form_control_container__time"></div>
+                <input class="form_control_container__time__input" type="number" id="fromInput_sdef" value="20" min="20" max="135"/>
+            </div>
+            <div class="form_control_container">
+                <div class="form_control_container__time"></div>
+                <input class="form_control_container__time__input" type="number" id="toInput_sdef" value="135" min="20" max="135"/>
+            </div>
+        </div>
+        <span>Speed</span>
+        <div class="sliders_control">
+            <input id="fromSlider_spd" type="range" value="10" min="10" max="140"/>
+            <input id="toSlider_spd" type="range" value="140" min="10" max="140"/>
+        </div>
+        <div class="form_control">
+            <div class="form_control_container">
+                <div class="form_control_container__time"></div>
+                <input class="form_control_container__time__input" type="number" id="fromInput_spd" value="10" min="10" max="140"/>
+            </div>
+            <div class="form_control_container">
+                <div class="form_control_container__time"></div>
+                <input class="form_control_container__time__input" type="number" id="toInput_spd" value="140" min="10" max="140"/>
+            </div>
+        </div>
+      </div>
+      <input type="button" id="num_submit_bottom" class="button-3" value="Set Value" style="float:left;margin-left:10%;width:80%"></input>
+<!--     <button class="button-3" role="button">Button 3</button> -->
+  	</div>
+    <div style="float:left;margin-left:10px;width:40%" id="map"></div>
+
+      <script src="bundle.js">
+      </script>
+    
+
+  </body>
+</html>
